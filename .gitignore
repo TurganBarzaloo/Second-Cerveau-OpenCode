@@ -4,6 +4,11 @@
 opencode.json
 registre-risques.md
 
+# Documents de travail privés : cadrage, comptes rendus, sources de référence
+# non redistribuables (dont llm-wiki.md, sans licence de redistribution
+# identifiee). Ne jamais versionner : ils n'appartiennent pas au kit publiable.
+/sources/
+
 # Répertoires système et cache spécifiques aux agents
 .claude/
 .claude.md
