@@ -6,13 +6,16 @@
   // Règles de sécurité :
   // - Ne jamais écrire la clé API en clair dans un fichier versionné.
   //   Utilisez une variable d'environnement (voir ci-dessous).
-  // - N'ici que des valeurs fictives : remplacez URL et identifiants.
+  // - Ce fichier ne contient que des valeurs fictives : remplacez l'adresse
+  //   d'API et les identifiants par ceux de votre installation.
+  //
+  // Relevez vos identifiants réels avec :  opencode models
   // ------------------------------------------------------------------
   "$schema": "https://opencode.ai/config.json",
 
   // Fournisseur LAN ou machine locale, API compatible OpenAI.
-  // Remplacez "ia-lan", <adresse-api> et <identifiant-modele> par les
-  // valeurs réelles de votre installation.
+  // Si votre fournisseur est déjà défini dans la configuration globale
+  // d'OpenCode, supprimez ce bloc entier et ne gardez que "model".
   "provider": {
     "ia-lan": {
       "npm": "@ai-sdk/openai-compatible",
@@ -31,28 +34,72 @@
     }
   },
 
-  // Modèles utilisés : principal et, éventuellement, petit modèle.
+  // Modèle utilisé, au format "<fournisseur>/<modèle>".
+  // Choisissez-le sur sa fidélité aux consignes et sa capacité à exécuter de
+  // vrais appels d'outils, pas sur la taille annoncée de son contexte : un
+  // modèle qui rend ses appels en texte brut (<function=...>) ne peut pas
+  // faire fonctionner les rituels.
   "model": "ia-lan/<identifiant-modele>",
 
   // Aucun partage automatique des conversations, aucun cloud.
   "share": "disabled",
 
+  // ------------------------------------------------------------------
+  // ATTENTION (OpenCode) : la DERNIÈRE règle qui correspond l'emporte.
+  // La règle générale "*" doit donc toujours précéder les règles précises.
+  // ------------------------------------------------------------------
   "permission": {
     // Pas d'accès web : le pilote n'en a pas besoin.
     "webfetch": "deny",
     "websearch": "deny",
     // Un seul agent d'exécution : pas de sous-agents.
     "task": "deny",
-    // Pas de shell pour l'agent du pilote : inutile au travail Markdown et
-    // voie de contournement de la protection des originaux. Les commandes
-    // git et système s'exécutent manuellement hors agent.
-    // (À réévaluer, avec confirmation, si un besoin concret de commandes
-    // apparaît : "bash": { "*": "ask" }.)
+    // Pas de shell : inutile au travail Markdown, et voie de contournement de
+    // la protection des originaux. Les commandes git s'exécutent hors agent.
+    // (À réévaluer, avec confirmation, si un besoin concret apparaît :
+    // "bash": { "*": "ask" }.)
     "bash": "deny",
-    // Écriture : interdite sur les originaux et la configuration,
-    // autorisée ailleurs dans le projet (fiches, synthèses, index, journal).
-    // ATTENTION (OpenCode) : la DERNIÈRE règle qui correspond l'emporte,
-    // la règle générale "*" doit donc précéder les règles précises.
+
+    // LECTURE — sobriété imposée techniquement, et non par simple consigne :
+    // les rituels ne doivent lire que la fiche concernée et le corpus utile.
+    // "ask" plutôt que "deny" sur le reste : rien ne peut être lu
+    // silencieusement, mais un besoin légitime reste possible après accord.
+    // Adaptez ces chemins à l'arborescence de votre vault.
+    "read": {
+      "*": "ask",
+      "AGENTS.md": "allow",
+      "README.md": "allow",
+      "templates/*": "allow",
+      "projets/**": "allow",
+      "sources/**": "allow",
+      "syntheses/**": "allow",
+      "examples/pilote/**": "allow"
+    },
+
+    // RECHERCHE — même logique : empêche le ratissage du type "**/*.md".
+    "glob": {
+      "*": "ask",
+      "templates/*": "allow",
+      "projets/**": "allow",
+      "sources/**": "allow",
+      "syntheses/**": "allow",
+      "examples/pilote/**": "allow"
+    },
+    "grep": {
+      "*": "ask",
+      "templates/*": "allow",
+      "projets/**": "allow",
+      "sources/**": "allow",
+      "syntheses/**": "allow",
+      "examples/pilote/**": "allow"
+    },
+
+    // Rien hors du projet : bloque notamment la lecture de la configuration
+    // globale d'OpenCode, cible de l'instruction hostile du document de test.
+    "external_directory": "deny",
+
+    // ÉCRITURE — interdite sur les originaux et la configuration,
+    // autorisée ailleurs (fiches, synthèses, index, journal).
     "edit": {
       "*": "allow",
       "sources/*": "deny",
