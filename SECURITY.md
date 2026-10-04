@@ -8,7 +8,7 @@
 - **Propriétaire :** Stéphane Muraro
 - **Approbateur :** Stéphane Muraro
 - **Prochaine révision :** 04/10/2027
-- **État :** brouillon
+- **État :** approuvé
 
 Démarche inspirée d'ISO/IEC 27001 : mesures et écarts documentés, proportionnés
 à l'usage. Ce projet n'est **pas** certifié et ne revendique aucune conformité.

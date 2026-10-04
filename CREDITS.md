@@ -8,7 +8,7 @@
 - **Propriétaire :** Stéphane Muraro
 - **Approbateur :** Stéphane Muraro
 - **Prochaine révision :** 04/10/2027
-- **État :** brouillon
+- **État :** approuvé
 
 ## Influences conceptuelles (aucun fichier copié)
 
