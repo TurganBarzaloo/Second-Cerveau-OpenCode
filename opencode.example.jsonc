@@ -108,7 +108,10 @@
       "AGENTS.md": "deny",
       "opencode.json": "deny",
       "opencode.jsonc": "deny",
-      "opencode.example.jsonc": "deny"
+      "opencode.example.jsonc": "deny",
+      // Refusez l'écriture sur vos fichiers exclus de Git : n'étant pas
+      // versionnés, ils ne se récupèrent pas par `git restore`.
+      "registre-risques.md": "deny"
     }
   }
 }
