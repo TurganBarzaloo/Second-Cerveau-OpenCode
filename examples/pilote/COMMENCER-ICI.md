@@ -61,6 +61,10 @@ examples/pilote/syntheses/fiche-accueil-atelier.md, avec les références.
 **Attendu — c'est le cœur du parcours :**
 
 - les faits de `materiel.md` sont ajoutés avec leur renvoi de passage ;
+- la **structure de la synthèse est préservée** : en-tête « SYNTHÈSE PRODUITE PAR
+  L'IA », sections Faits établis / Inférences / Incertitudes / Contradictions /
+  Sources (voir `templates/synthese.md`). Si l'agent la remplace par un document
+  de forme libre, c'est un écart, même si le résultat semble plus lisible ;
 - une **contradiction apparaît** et est conservée avec ses **deux** références :
   `lieu.md` compte **20 chaises**, `materiel.md` n'en relève que **12** ;
 - l'agent **ne tranche pas**, et ne retient pas automatiquement la source la plus

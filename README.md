@@ -38,6 +38,7 @@ LICENSE.md           licence adoptée : MIT
 opencode.example.jsonc  configuration générique (valeurs fictives)
 .opencode/commands/  /ouvrir et /clore
 templates/projet.md  modèle de fiche projet
+templates/synthese.md  modèle de synthèse (structure à préserver)
 examples/pilote/     mini-vault Obsidian fictif (P001 + 2 sources + synthèse)
 ```
 
@@ -121,8 +122,11 @@ choix explicite.
 ```
 
 L'agent rédige d'abord lui-même le compte rendu, une ligne par fait marquée
-`[observé]`, `[déduit]` ou `[idée]` avec l'effet exact sur la fiche, puis vous
-demande vos amendements. **Il n'écrit qu'après votre validation.**
+`[observé]`, `[déduit]`, `[simulé]` ou `[idée]` avec l'effet exact sur la fiche,
+puis vous demande vos amendements. **Il n'écrit qu'après votre validation.**
+
+`[simulé]` couvre les données que vous demandez d'inventer pour répéter un
+scénario : elles restent identifiables comme telles et ne closent aucune tâche.
 
 Ensuite : seuls les faits attestés changent ; une idée reste « proposée » et ne
 devient pas une tâche ; le journal et le point de reprise sont actualisés dans la

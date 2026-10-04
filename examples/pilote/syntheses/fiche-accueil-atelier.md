@@ -25,6 +25,11 @@ Rassembler les informations nécessaires à la fiche d'accueil de l'atelier fict
 - Aucune pour le moment : les trois faits ci-dessus sont lus directement dans la
   source.
 
+## Faits simulés
+
+- Aucun. Une donnée inventée à la demande de l'utilisateur figurerait ici,
+  marquée « simulé », et ne deviendrait jamais un fait établi.
+
 ## Incertitudes
 
 - **Mobilier et matériel : non couverts.** `materiel.md` n'est pas encore

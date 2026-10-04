@@ -19,14 +19,20 @@ réellement passé. Une ligne par fait, avec son effet exact sur la fiche :
 1. [observé] <fait> → P001-T01 : à faire ➜ faite
 2. [observé] <fait> → P001-T02 : ➜ bloquée (motif)
 3. [déduit]  <fait> → journal seulement
-4. [idée]    <fait> → notes, « proposée », ne devient pas une tâche
+4. [simulé]  <fait> → journal, mention « simulé », ne clôt aucune tâche
+5. [idée]    <fait> → notes, « proposée », ne devient pas une tâche
 
 Manque pour conclure : <…, ou « rien »>
 ```
 
-Jamais un `[déduit]` présenté comme établi. Date du compte rendu ≠ date
-d'exécution (inconnue → « non précisée »). N'invente aucune tâche, échéance ni
-avancement ; aucun fait observable → dis-le au lieu de remplir.
+Jamais un `[déduit]` ni un `[simulé]` présenté comme établi. Une donnée que je
+t'ai demandé d'inventer reste `[simulé]` jusqu'au bout de la séance, et
+n'autorise pas à marquer une tâche « faite ». N'étends pas une simulation
+au-delà de ce que j'ai demandé.
+
+Date du compte rendu ≠ date d'exécution (inconnue → « non précisée »). N'invente
+aucune tâche, échéance ni avancement ; aucun fait observable → dis-le au lieu de
+remplir. Ne cite une source que si elle contient réellement l'affirmation.
 
 Puis demande « Des amendements ? » et **STOP — attends ma réponse.**
 
