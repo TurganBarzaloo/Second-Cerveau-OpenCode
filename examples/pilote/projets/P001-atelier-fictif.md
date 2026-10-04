@@ -1,24 +1,28 @@
-# P001 — Préparer une fiche d'accueil pour un atelier fictif
+# P001 — Préparer l'accueil d'un atelier fictif de 18 participants
 
-> **PROJET 100 % FICTIF** — données d'essai pour la recette de la V0.
+> **PROJET 100 % FICTIF** — données d'essai servant de parcours didactique.
 > Ce projet ne correspond à aucun engagement réel.
 > Cette fiche fait autorité pour les tâches, décisions, journal et point de
 > reprise du projet.
+>
+> **Point de départ du tutoriel** : rien n'est encore fait. Suis
+> [COMMENCER-ICI.md](../COMMENCER-ICI.md) pour faire évoluer cette fiche
+> toi-même.
 
 - **Identifiant :** P001
-- **Objectif :** produire une fiche d'accueil fiable pour l'atelier fictif prévu le 14 octobre 2026.
-- **Critère de fin :** la fiche d'accueil est rédigée, vérifiée contre les deux sources, et la contradiction connue (étage de la salle) y est signalée.
-- **État :** brouillon
-- **Dernière action connue :** P001-T01 faite le 2026-10-03 09h00:00 : accès au lieu confirmé, salle au 1er étage, disponible le 14 octobre de 9h à 12h — jour à clarifier (compte rendu : « jeudi » ; calendrier : le 14 octobre 2026 est un mercredi).
-- **Prochaine action :** rédiger la fiche d'accueil et la vérifier contre les sources (P001-T03) — décidée (plan initial du projet)
+- **Objectif :** produire une fiche d'accueil fiable pour l'atelier fictif du 14 octobre 2026, qui attend 18 participants.
+- **Critère de fin :** la fiche d'accueil est rédigée, chaque information est reliée à une source, et la capacité d'accueil est soit confirmée, soit explicitement signalée comme non établie.
+- **État :** à lancer
+- **Dernière action connue :** indéterminé — projet non commencé.
+- **Prochaine action :** vérifier l'accès au lieu (P001-T01) — décidée (plan initial du projet)
 
 ## Tâches
 
 | ID | Résultat observable | État | Date |
 | --- | --- | --- | --- |
-| P001-T01 | Accès au lieu confirmé : adresse, étage effectif, horaires d'ouverture | faite | 2026-10-03 09h00:00 |
-| P001-T02 | Matériel retenu pour l'atelier : liste finale validée | bloquée | — |
-| P001-T03 | Fiche d'accueil rédigée et vérifiée contre les sources | à faire | — |
+| P001-T01 | Accès au lieu vérifié : étage, voie d'accès, horaires d'ouverture | à faire | — |
+| P001-T02 | Capacité d'accueil arrêtée pour 18 participants | à faire | — |
+| P001-T03 | Fiche d'accueil rédigée, chaque information reliée à sa source | à faire | — |
 
 ## Décisions
 
@@ -27,29 +31,21 @@
 ## Connaissances liées
 
 - Source 1 (lieu) : [lieu.md](../sources/lieu.md)
-- Source 2 (matériel) : [materiel.md](../sources/materiel.md)
-- Synthèse : [fiche-accueil-atelier.md](../syntheses/fiche-accueil-atelier.md)
+- Source 2 (mobilier et matériel) : [materiel.md](../sources/materiel.md)
+- Synthèse : [fiche-accueil-atelier.md](../syntheses/fiche-accueil-atelier.md) — ne couvre encore que `lieu.md`.
 
 ## Notes
 
-- Idée proposée (compte rendu du 2026-10-04 15h45:00) : prévoir un vidéoprojecteur de prêt pour lever le blocage de P001-T02.
-- Note manuelle (test de reprise) : la salle dispose d'un tableau blanc mural, non mentionné dans les sources.
+- Aucune note pour le moment.
 
 ## Journal (bref)
 
 | Date du compte rendu | Exécution | Fait enregistré |
 | --- | --- | --- |
-| 2026-10-03 09h00:00 | 2026-10-03 09h00:00 | Projet fictif créé pour la recette V0 ; tâches P001-T01 à P001-T03 identifiées ; synthèse initiale des deux sources établie. |
-| 2026-10-04 15h45:00 | 2026-10-03 09h00:00 | Accès au lieu confirmé : salle au 1er étage, disponible le jeudi 14 octobre de 9h à 12h — P001-T01 terminée. |
-| 2026-10-04 15h45:00 | non précisée | P001-T02 bloquée : vidéoprojecteur en panne, réparation non planifiée ; idée proposée : prévoir un vidéoprojecteur de prêt. |
-| 2026-10-04 15h45:00 | non précisée | Incohérence de jour signalée : le compte rendu indique « jeudi 14 octobre », mais le 14 octobre 2026 est un mercredi ; jour marqué « à clarifier », à ne pas traiter comme un fait établi. |
+| 2026-10-04 | 2026-10-04 | Projet fictif créé pour le parcours didactique ; trois tâches identifiées, aucune encore engagée. |
 
 ## Point de reprise
 
-Projet en cours : P001-T01 faite le 2026-10-03 09h00:00 (accès au lieu confirmé,
-salle au 1er étage, disponible le 14 octobre de 9h à 12h — jour à clarifier :
-« jeudi » dans le compte rendu, mais le 14 octobre 2026 est un mercredi).
-P001-T02 bloquée (vidéoprojecteur en panne, réparation non planifiée) ; idée
-proposée : prévoir un vidéoprojecteur de prêt. Reprendre à la prochaine
-action : rédiger la fiche d'accueil et la vérifier contre les sources
-(P001-T03).
+Projet non commencé : les trois tâches sont à faire et aucun fait n'a encore été
+enregistré. Reprendre à la prochaine action : vérifier l'accès au lieu
+(P001-T01).

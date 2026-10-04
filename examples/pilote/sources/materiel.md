@@ -6,11 +6,12 @@
 
 ## Emplacement
 
-L'inventaire situe la salle A **au rez-de-chaussée**, près de la salle des fêtes.
+L'inventaire situe la salle A au 1er étage du bâtiment principal.
 
-## Matériel présent
+## Mobilier et matériel présents
 
-- Tables de travail : 2 (chaises : 12)
+- Chaises : **12**
+- Tables de travail : 2 (amovibles)
 - Flipchart + feutres
 - Vidéoprojecteur + écran mural
 - Câble HDMI et adaptateur USB-C
@@ -18,4 +19,5 @@ L'inventaire situe la salle A **au rez-de-chaussée**, près de la salle des fê
 
 ## Remarques
 
-Le vidéoprojecteur a été utilisé sans incident le 12 septembre.
+Inventaire relevé sur place le 17 septembre. Le vidéoprojecteur a été utilisé
+sans incident le 12 septembre.
