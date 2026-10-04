@@ -1,0 +1,31 @@
+# Dépôt du second cerveau OpenCode
+
+# Fichiers de configuration sensibles
+opencode.json
+registre-risques.md
+
+# Répertoires système et cache
+.opencode/
+*.tmp
+*.log
+
+# Fichiers temporaires
+*.swp
+*~
+
+# Système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+
+# Dépendances locales
+node_modules/
+package-lock.json
+npm-debug.log
+
+# Configuration locale d'OpenCode
+.opencode/config.json
+.opencode/commands/*

@@ -1,0 +1,67 @@
+{
+  // ------------------------------------------------------------------
+  // Exemple de configuration générique — à copier sous opencode.json
+  // (exclu de Git par .gitignore) et à adapter à votre machine.
+  //
+  // Règles de sécurité :
+  // - Ne jamais écrire la clé API en clair dans un fichier versionné.
+  //   Utilisez une variable d'environnement (voir ci-dessous).
+  // - N'ici que des valeurs fictives : remplacez URL et identifiants.
+  // ------------------------------------------------------------------
+  "$schema": "https://opencode.ai/config.json",
+
+  // Fournisseur LAN ou machine locale, API compatible OpenAI.
+  // Remplacez "ia-lan", <adresse-api> et <identifiant-modele> par les
+  // valeurs réelles de votre installation.
+  "provider": {
+    "ia-lan": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "IA LAN (exemple)",
+      "options": {
+        "baseURL": "https://<adresse-api-lan>/v1",
+        // La clé est lue depuis la variable d'environnement IA_LAN_API_KEY.
+        "apiKey": "{env:IA_LAN_API_KEY}"
+      },
+      "models": {
+        "<identifiant-modele>": {
+          "name": "Modele LAN (exemple)",
+          "limit": { "context": 131072, "output": 16384 }
+        }
+      }
+    }
+  },
+
+  // Modèles utilisés : principal et, éventuellement, petit modèle.
+  "model": "ia-lan/<identifiant-modele>",
+
+  // Aucun partage automatique des conversations, aucun cloud.
+  "share": "disabled",
+
+  "permission": {
+    // Pas d'accès web : le pilote n'en a pas besoin.
+    "webfetch": "deny",
+    "websearch": "deny",
+    // Un seul agent d'exécution : pas de sous-agents.
+    "task": "deny",
+    // Pas de shell pour l'agent du pilote : inutile au travail Markdown et
+    // voie de contournement de la protection des originaux. Les commandes
+    // git et système s'exécutent manuellement hors agent.
+    // (À réévaluer, avec confirmation, si un besoin concret de commandes
+    // apparaît : "bash": { "*": "ask" }.)
+    "bash": "deny",
+    // Écriture : interdite sur les originaux et la configuration,
+    // autorisée ailleurs dans le projet (fiches, synthèses, index, journal).
+    // ATTENTION (OpenCode) : la DERNIÈRE règle qui correspond l'emporte,
+    // la règle générale "*" doit donc précéder les règles précises.
+    "edit": {
+      "*": "allow",
+      "sources/*": "deny",
+      "examples/pilote/sources/*": "deny",
+      ".opencode/*": "deny",
+      "AGENTS.md": "deny",
+      "opencode.json": "deny",
+      "opencode.jsonc": "deny",
+      "opencode.example.jsonc": "deny"
+    }
+  }
+}
