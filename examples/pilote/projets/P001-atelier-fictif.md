@@ -5,9 +5,9 @@
 > Cette fiche fait autorité pour les tâches, décisions, journal et point de
 > reprise du projet.
 >
-> **Point de départ du tutoriel** : rien n'est encore fait. Suis
+> **Point de départ du tutoriel** : rien n'est encore fait. Suivez
 > [COMMENCER-ICI.md](../COMMENCER-ICI.md) pour faire évoluer cette fiche
-> toi-même.
+> vous-même.
 
 - **Identifiant :** P001
 - **Objectif :** produire une fiche d'accueil fiable pour l'atelier fictif du 14 octobre 2026, qui attend 18 participants.

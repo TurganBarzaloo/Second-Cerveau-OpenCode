@@ -1,7 +1,7 @@
 # Journal du pilote (ajout en fin de fichier)
 
 Journal du mini-vault fictif. Une ligne par opération validée. Il est volontairement
-presque vide : c'est toi qui le remplis en suivant [COMMENCER-ICI.md](COMMENCER-ICI.md).
+presque vide : c'est vous qui le remplissez en suivant [COMMENCER-ICI.md](COMMENCER-ICI.md).
 
 | Date | Type | Objet | Détail |
 | --- | --- | --- | --- |

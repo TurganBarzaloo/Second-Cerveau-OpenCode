@@ -3,7 +3,7 @@
 Petit catalogue du mini-vault d'essai. À maintenir lors de chaque ingestion
 validée.
 
-**Nouveau venu : commence par [COMMENCER-ICI.md](COMMENCER-ICI.md)** — parcours
+**Nouveau venu : commencez par [COMMENCER-ICI.md](COMMENCER-ICI.md)** — parcours
 guidé en 7 étapes, avec le résultat attendu à chacune.
 
 ## Projets
