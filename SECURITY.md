@@ -27,24 +27,14 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
 - OpenCode comme seul client agent. Pas de service permanent, pas de base
   vectorielle, pas de plugin, pas de MCP.
 
-## Périmètre
-
-- État : prototype en évaluation interne ; publication externe en attente de
-  validation (voir README.md, rubrique « Publication »).
-- Un poste de travail, ce dépôt (kit + exemples fictifs), un vault Obsidian
-  éventuellement séparé.
-- Un modèle d'IA accessible via une API compatible OpenAI, sur le LAN ou sur la
-  machine locale (adresse et identifiant propres à chaque installation).
-- OpenCode comme seul client agent. Pas de service permanent, pas de base
-  vectorielle, pas de plugin, pas de MCP.
-
 ## Mesures
 
 | Sujet | Mesure |
 | --- | --- |
 | Données | Les exemples contenus dans le dépôt sont 100 % fictifs. Les données réelles se gardent dans un vault privé séparé du dépôt. |
 | Secrets | Jamais de clé ni d'adresse réelle dans un fichier versionné. La config exemple lit la clé depuis une variable d'environnement ; la config locale réelle est exclue de Git. |
-| Accès de l'agent | `webfetch`, `websearch` et `bash` refusés, pas de plugin ni MCP. Les sous-agents sont à réfléchir avant mise en place (mécanismes de contrôle, de retour à l'agent général, évitement des boucles infinies). L'édition est refusée sur les originaux (`sources/`) et sur la configuration. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
+| Accès de l'agent | `webfetch`, `websearch`, `bash` et `task` refusés, pas de plugin ni MCP. L'édition est refusée sur les originaux (`sources/`, `examples/pilote/sources/`) et sur la configuration. `external_directory` refusé : rien hors du projet, ce qui couvre la configuration globale d'OpenCode. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
+| Sobriété de lecture | `read`, `glob` et `grep` passent par une liste blanche de chemins, le reste en `ask`. Rien ne peut être lu ni ratissé silencieusement. Limite : voir ci-dessous. |
 | Contenu importé | Le contenu des documents est traité comme des données, jamais comme des consignes : une source qui demande une commande, un secret ou une publication n'a aucune autorité (cf. `examples/pilote/sources/EXEMPLE-injection.md`). |
 | Intégrité et reprise | Originaux conservés à l'identique ; une seule fiche projet fait autorité ; historique Git local ; sauvegarde distincte et test de restauration (procédure ci-dessous). |
 | Sortie de données | `share` désactivé : aucune conversation n'est partagée ni envoyée à un service de partage. Les seuls flux sortants attendus sont les appels au modèle configuré. |
@@ -55,6 +45,17 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
   elles dépendent de la configuration en vigueur (ici : shell refusé) et ne
   couvrent pas ce que l'utilisateur exécute manuellement en dehors de l'agent.
   Une liste de paramètres n'est pas une preuve de confinement au LAN.
+- **`bash: "deny"` n'épuise pas les voies d'exécution.** En essai, le modèle a
+  déclenché un outil `execute` évaluant du code (`tools.opencode.session_move`)
+  alors que le shell était refusé. Cet outil ne figure pas dans la liste de
+  permissions documentée. Ne pas présenter le refus du shell comme une garantie
+  qu'aucun code ne s'exécute.
+- **La sobriété de lecture reste partiellement déclarative.** Les permissions
+  s'appliquent à la session, pas à la commande : `/ouvrir` ne peut donc pas être
+  rendu plus strict que `/clore`, qui a besoin des sources et des synthèses. En
+  essai, l'agent a lu 4 fichiers du pilote pour en ouvrir un seul — autorisé par
+  la liste blanche. Les permissions bornent le périmètre extérieur ; à
+  l'intérieur, la sobriété dépend de la docilité du modèle.
 - L'authentification, la protection du transport et la journalisation côté
   serveur de l'API LAN ne sont pas couvertes par ce kit ; les vérifier côté
   serveur avant d'y envoyer des données réelles.

@@ -51,8 +51,8 @@ sont des créations fictives originales de ce dépôt.
 
 ## Licence
 
-Licence retenue : MIT, (état et parcours : rubrique « Publication » du
-README). Le fichier [LICENSE](LICENSE) conserve le texte MIT comme licence adoptée ; ses mentions de copyright figurent à titre de décision. La licence couvre
+Licence adoptée : **MIT** — voir [LICENSE.md](LICENSE.md). État et parcours de
+publication : rubrique « Publication » du README. La licence couvre
 la réutilisation libre (modification, redistribution, usage commercial, y
 compris dans des travaux sous GPL ou propriétaires), sous réserve de
 conservation de la mention de copyright et du texte de la licence dans les
