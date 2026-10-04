@@ -25,11 +25,24 @@ autre fiche. N'écris dans aucun fichier. Puis réponds selon le format ci-desso
 
    Aucune fiche trouvée : dis-le, propose seulement la création.
 4. Si je choisis une fiche existante : lis-la, puis réponds.
-5. Si je choisis la création : demande-moi l'objectif et le critère de fin,
-   prends le premier identifiant libre (`P001`, `P002`, …), copie
-   `templates/projet.md` dans le dossier `projets/`, ne renseigne **que** ce que
-   je t'ai donné (le reste « indéterminé », état `à lancer`, aucune tâche), puis
-   réponds.
+5. Si je choisis la création :
+   1. demande-moi l'**objectif**, le **critère de fin**, la **classification** et
+      le **propriétaire**. Un critère de fin doit être observable : s'il est
+      vague ou s'il contredit l'objectif — par exemple un décompte qui ne
+      correspond pas au nombre de livrables énumérés — signale-le et demande
+      une précision avant d'écrire ;
+   2. prends le premier identifiant libre (`P001`, `P002`, …) ;
+   3. copie `templates/projet.md` dans le dossier `projets/` et ne renseigne
+      **que** ce que je t'ai donné : le reste « indéterminé », état `à lancer`,
+      aucune tâche ;
+   4. **retire du résultat tout ce qui appartient au gabarit** : textes entre
+      chevrons, lignes d'aide (« États possibles : … », « Date = … »), et tout
+      marqueur de date ou d'heure non remplacé. Un `HHhmm:ss` ou un `AAAA-MM-JJ`
+      laissé tel quel est un défaut : utilise la date et l'heure réelles ;
+   5. **actualise `index.md`** (le projet y figure) **et `log.md`** (une ligne
+      datée : création, identifiant, classification). Sans ça le vault annonce
+      un état faux ;
+   6. puis réponds.
 
 C'est la seule écriture permise par cette commande, et seulement après mon choix.
 
