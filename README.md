@@ -227,14 +227,18 @@ La sobriété interne reste donc une consigne, pas une contrainte technique.
 Rubrique de référence pour l'état de publication, la licence et les droits ;
 les autres documents renvoient ici.
 
-- **État actuel :** prototype destiné à une évaluation interne sur le Github
-  de Stéphane Muraro, avec accès restreint. Aucune publication externe à ce
-  jour ; aucune validation ne doit être présentée comme déjà obtenue.
-- **Parcours décidé :**
-  1. Évaluation sur le GitHub personnel, avec accès restreint ;
-  2. Validation et amélioration;
-  3. Publication publique sur le GitHub personnel de Stéphane Muraro,
-     uniquement après validation.
+- **État actuel :** **publié** sur le GitHub de Stéphane Muraro depuis le
+  2026-10-04. Le kit est utilisable, mais **la recette V0 reste à refaire** sur
+  OpenCode `2.0.22` : voir la rubrique Validation. Aucune validation
+  fonctionnelle ne doit donc être présentée comme obtenue, et aucune garantie de
+  sécurité n'est revendiquée — voir [SECURITY.md](SECURITY.md) et ses limites
+  connues.
+- **Ce que le dépôt contient :** le kit, sa documentation et les exemples
+  fictifs uniquement. Le vault personnel et la configuration locale restent
+  séparés et exclus de Git.
+- **Historique :** le dépôt a été réécrit puis recréé le 2026-10-04 pour retirer
+  des documents de travail privés publiés par erreur. Les SHA antérieurs à cette
+  date ne sont plus valides.
 - **Licence :** MIT, **adoptée** (décision du 2026-10-04). Texte complet dans
   [`LICENSE.md`](LICENSE.md).
 - **Mentions de copyright :** « Copyright (c) 2026
@@ -244,11 +248,11 @@ les autres documents renvoient ici.
 - **Objectif final :** second cerveau IA open source publié, compatible
   OpenCode et LLM LAN/local, léger, évolutif, inspiré d'ISO 27001 sans
   certification.
-- **Contenu du futur dépôt public :** uniquement le kit, sa documentation et
-  les exemples fictifs, en documents génériques ; le vault personnel reste
-  séparé. Vérifié le 2026-10-O4 : les fichiers suivis par Git sont limités au
-  kit. `sources/` (racine), `opencode.json` et le registre privé des risques
-  sont exclus, et aucune clé ni identifiant LAN n'apparaît dans le dépôt.
-- **Avant push :** relire l'historique Git complet et activer le rapport privé
+- **Contrôle effectué le 2026-10-04 avant publication :** les fichiers suivis
+  par Git sont limités au kit ; `sources/` (racine), `opencode.json` et le
+  registre privé des risques sont exclus ; aucune clé, adresse LAN ni
+  identifiant de fournisseur n'apparaît dans les fichiers suivis (recherche
+  textuelle sur l'ensemble de l'index Git).
+- **Signalement de vulnérabilité :** activer le rapport privé
   dans la Security Policy GitHub (canal décrit dans
   [SECURITY.md](SECURITY.md)).
