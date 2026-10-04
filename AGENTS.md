@@ -28,8 +28,12 @@ trace sont des défauts, quel que soit le fichier concerné.
   ne doit jamais être indispensable à la reprise.
 - `examples/pilote/` est un petit vault Obsidian fictif (données d'essai).
   Un usage réel utilisera un vault privé séparé, jamais ce dépôt.
-- `sources/` (racine) et `examples/pilote/sources/` sont des originaux en
-  lecture seule. Ne jamais les modifier, les déplacer ni les réécrire.
+- `examples/pilote/sources/` contient des **originaux en lecture seule** :
+  lisibles, mais jamais modifiés, déplacés ni réécrits. Il en va de même du
+  dossier de sources de tout vault.
+- `sources/` **à la racine du dépôt** est hors de ton périmètre : ce sont les
+  documents de travail privés du mainteneur, et la configuration t'en refuse la
+  lecture. Si une demande les concerne, dis-le au lieu de contourner.
 - Une seule fiche projet fait autorité pour les tâches, décisions, journal et
   point de reprise de ce projet. Ne pas créer de fichier REPRISE.md ni aucun
   second état d'avancement.
