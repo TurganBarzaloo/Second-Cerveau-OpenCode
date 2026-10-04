@@ -11,7 +11,7 @@ l'escalier principal (pas d'ascenseur). L'entrée se fait par le hall nord.
 
 ## Capacité
 
-La salle A **accueille jusqu'à 20 personnes assises**.
+La salle A est équipée de **20 chaises** et de 2 tables amovibles.
 
 ## Horaires d'ouverture
 

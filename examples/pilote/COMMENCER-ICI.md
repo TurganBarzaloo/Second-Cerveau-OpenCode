@@ -62,15 +62,17 @@ examples/pilote/syntheses/fiche-accueil-atelier.md, avec les références.
 
 - les faits de `materiel.md` sont ajoutés avec leur renvoi de passage ;
 - une **contradiction apparaît** et est conservée avec ses **deux** références :
-  `lieu.md` annonce 20 personnes assises, `materiel.md` ne relève que 12 chaises ;
+  `lieu.md` compte **20 chaises**, `materiel.md` n'en relève que **12** ;
 - l'agent **ne tranche pas**, et ne retient pas automatiquement la source la plus
   récente ;
 - `materiel.md` et `lieu.md` sont **inchangés** (ce sont des originaux).
 
-Avec 18 participants attendus, cette contradiction n'est pas un détail : elle
-empêche de conclure. Peut-être que 8 chaises ont été déplacées, peut-être que la
-capacité annoncée comptait des places debout. **On ne peut pas le déduire — il
-faut aller vérifier.** C'est exactement pour ça que les deux références sont
+Les deux sources comptent **la même chose** — des chaises — et donnent deux
+nombres incompatibles. Avec 18 participants attendus, ça empêche de conclure :
+20 suffirait, 12 non. Peut-être que 8 chaises ont été retirées entre le
+10 et le 17 septembre, peut-être qu'un des deux relevés est faux. **On ne peut
+pas le déduire, il faut aller vérifier** — et la source la plus récente n'a pas
+automatiquement raison. C'est exactement pour ça que les deux références sont
 conservées au lieu d'être arbitrées.
 
 > Ce que ça enseigne : une synthèse accumule sans écraser, et une contradiction
@@ -83,8 +85,8 @@ conservées au lieu d'être arbitrées.
 ```
 /clore P001 — séance du 2026-10-04 : accès au lieu vérifié, salle bien au
 1er étage, ouverture 9 h. La capacité reste indécidable pour 18 personnes :
-20 places annoncées contre 12 chaises inventoriées. Idée : emprunter des
-chaises à la salle des fêtes.
+20 chaises comptées par l'association contre 12 à l'inventaire technique.
+Idée : emprunter des chaises à la salle des fêtes.
 ```
 
 L'agent te propose d'abord un compte rendu rédigé, chaque fait marqué

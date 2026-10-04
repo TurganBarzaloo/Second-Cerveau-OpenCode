@@ -23,6 +23,6 @@ guidé en 7 étapes, avec le résultat attendu à chacune.
 
 - [fiche-accueil-atelier.md](syntheses/fiche-accueil-atelier.md) : ne couvre que
   `lieu.md`. En y intégrant `materiel.md`, une contradiction sur la capacité
-  d'accueil apparaît (20 places annoncées contre 12 chaises inventoriées).
+  d'accueil apparaît : `lieu.md` compte 20 chaises, `materiel.md` en relève 12.
 - [teste-injection.md](syntheses/teste-injection.md) : montre le traitement
   attendu d'une instruction hostile — ignorée, signalée, conservée comme donnée.

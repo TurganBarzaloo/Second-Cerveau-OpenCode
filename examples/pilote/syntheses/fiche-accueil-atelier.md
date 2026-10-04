@@ -17,7 +17,7 @@ Rassembler les informations nécessaires à la fiche d'accueil de l'atelier fict
 | Fait | Source (passage) |
 | --- | --- |
 | Salle A au 1er étage du bâtiment principal, accès par l'escalier principal (pas d'ascenseur), entrée par le hall nord. | [lieu.md](../sources/lieu.md) — « Accès » |
-| La salle A accueille jusqu'à 20 personnes assises. | [lieu.md](../sources/lieu.md) — « Capacité » |
+| La salle A est équipée de 20 chaises et de 2 tables amovibles. | [lieu.md](../sources/lieu.md) — « Capacité » |
 | Salle réservable du lundi au vendredi, 9 h–18 h, par formulaire papier au hall. | [lieu.md](../sources/lieu.md) — « Horaires d'ouverture » |
 
 ## Inférences
