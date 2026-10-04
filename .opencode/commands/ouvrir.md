@@ -28,9 +28,10 @@ autre fiche. N'écris dans aucun fichier. Puis réponds selon le format ci-desso
 5. Si je choisis la création :
    1. demande-moi l'**objectif**, le **critère de fin**, la **classification** et
       le **propriétaire**. Un critère de fin doit être observable : s'il est
-      vague ou s'il contredit l'objectif — par exemple un décompte qui ne
-      correspond pas au nombre de livrables énumérés — signale-le et demande
-      une précision avant d'écrire ;
+      vague, demande une précision avant d'écrire. Si son décompte diffère du
+      nombre de livrables énumérés, **ne conclus pas à une erreur** — c'est
+      souvent un seuil voulu (« 3 des 4 suffisent »). Demande lequel, puis
+      inscris le seuil explicitement ;
    2. prends le premier identifiant libre (`P001`, `P002`, …) ;
    3. copie `templates/projet.md` dans le dossier `projets/` et ne renseigne
       **que** ce que je t'ai donné : le reste « indéterminé », état `à lancer`,
