@@ -4,6 +4,11 @@
 > reprise de ce projet. Ne pas créer de second fichier d'avancement.
 
 - **Identifiant :** PXXX
+- **Classification :** public | interne | confidentiel
+- **Propriétaire :** <qui répond de ce projet>
+- **Créée le :** AAAA-MM-JJ · **Mise à jour le :** AAAA-MM-JJ
+- **Prochaine revue :** AAAA-MM-JJ, ou « non fixée »
+
 - **Objectif :** <résultat attendu, en une phrase>
 - **Critère de fin :** <comment on sait que le projet est terminé>
 - **État :** à lancer | en cours | bloqué | en pause | terminé | abandonné

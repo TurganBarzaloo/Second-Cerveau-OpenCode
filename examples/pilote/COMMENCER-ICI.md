@@ -21,9 +21,13 @@ consignes du kit.
 /ouvrir examples/pilote/projets/P001-atelier-fictif.md
 ```
 
-**Attendu :** l'objectif, le critère de fin, l'état `à lancer`, les trois tâches
-toutes `à faire`, et la prochaine action marquée « décidée ». **Aucun fichier
-modifié.**
+**Attendu :** la classification `public`, l'objectif, le critère de fin, l'état
+`à lancer`, les trois tâches toutes `à faire`, et la prochaine action marquée
+« décidée ». **Aucun fichier modifié.**
+
+La classification, le propriétaire et les dates figurent en tête de chaque fiche
+et de chaque synthèse : c'est l'exigence de traçabilité du kit, appliquée au
+vault et pas seulement à sa documentation.
 
 Sans argument, `/ouvrir` vous proposerait à la place la liste des fiches non
 terminées, ou la création d'une nouvelle fiche.

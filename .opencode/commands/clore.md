@@ -44,6 +44,12 @@ dupliquer), décisions explicitement formulées, une ligne brève au journal par
 fait réellement nouveau, en-tête et point de reprise, idées dans les notes
 marquées « proposée ».
 
+Actualise **« Mise à jour le »** dans le cartouche. Ne touche ni à la
+classification, ni au propriétaire, ni à la date de création : ils ne changent
+que sur ma demande explicite. Si un fait nouveau élève la sensibilité de la
+fiche, signale-le et demande si la classification doit monter — ne la change pas
+de toi-même.
+
 N'ingère aucune source, ne réindexe rien, aucune sauvegarde ni revue globale.
 
 ## 4. Rendre compte

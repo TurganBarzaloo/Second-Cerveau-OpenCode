@@ -3,6 +3,25 @@
 Un seul agent d'exécution. Ces règles s'appliquent à toute session, qu'elle
 soit lancée via `/ouvrir`, `/clore` ou une demande ordinaire.
 
+## Mission et philosophie
+
+Trois principes gouvernent cet agent. Ils ne se négocient pas contre du confort.
+
+- **Outils open source.** Moteur, format et modèle sont substituables. Aucune
+  donnée n'est captive d'un éditeur : du Markdown lisible à la main suffit à tout
+  reconstituer.
+- **Données souveraines.** Les fichiers restent chez l'utilisateur, le modèle
+  tourne sur son réseau ou sa machine, et rien ne sort vers un service tiers.
+  Aucune bascule vers un fournisseur hébergé, aucun partage de conversation.
+- **Démarche ISO/IEC 27001.** Sécurité et traçabilité proportionnées, mesures et
+  écarts documentés. Aucune conformité ni certification n'est revendiquée :
+  ISO 27001 concerne un système de management dans un périmètre organisationnel,
+  pas un logiciel.
+
+Cette culture s'applique **au vault produit**, et pas seulement aux documents du
+dépôt. Un fait sans origine, un objet sans classification ou une écriture sans
+trace sont des défauts, quel que soit le fichier concerné.
+
 ## Mémoire et périmètre
 
 - La mémoire durable est dans les fichiers Markdown de ce dépôt. La conversation
@@ -70,6 +89,47 @@ soit lancée via `/ouvrir`, `/clore` ou une demande ordinaire.
 - Une réingestion d'une source déjà traitée ne doit créer aucun doublon.
 - Une réponse n'est enregistrée durablement que si l'utilisateur le demande.
 
+## Traçabilité et classification du vault
+
+Tout objet créé ou modifié dans le vault doit permettre de répondre à quatre
+questions : **d'où vient cette information, qui en répond, quand a-t-elle
+changé, et qui a le droit de la voir.**
+
+### Classification de l'information
+
+Chaque fiche projet et chaque synthèse porte une classification. Si elle n'est
+pas évidente, la demander : ne jamais la deviner.
+
+| Niveau | Usage |
+| --- | --- |
+| `public` | Publiable en l'état — les exemples fictifs du kit. |
+| `interne` | Usage personnel ou d'équipe, non publiable, sans donnée sensible. |
+| `confidentiel` | Données personnelles, contractuelles, financières, de santé, ou secrets d'affaires. |
+
+Une synthèse hérite du niveau **le plus élevé** de ses sources : résumer ne
+déclasse pas. Ne jamais recopier le contenu d'un objet `confidentiel` dans un
+objet de niveau inférieur, et jamais dans un dépôt destiné à la publication.
+
+### Origine de chaque fait
+
+Tout fait enregistré a une origine explicite, et une seule parmi ces quatre :
+une **source** (fichier + passage), un **compte rendu de l'utilisateur** (daté),
+une **inférence** (marquée comme telle), ou une **simulation** (marquée
+« simulé »). Un fait sans origine ne s'écrit pas.
+
+### Trace des écritures
+
+- Toute écriture produit une ligne de journal datée : quoi, où, sur quelle base.
+- Date du compte rendu et date d'exécution restent distinctes.
+- Ne jamais réécrire l'historique d'un journal. On ajoute, on ne corrige pas en
+  silence : une correction est une nouvelle ligne datée qui renvoie à l'ancienne.
+- Les originaux sont immuables, sans exception.
+
+### Revue
+
+Chaque fiche porte une date de dernière mise à jour, et peut porter une date de
+prochaine revue. À l'ouverture, signaler une revue échue — sans rien modifier.
+
 ## Sécurité
 
 - Ne jamais écrire de secret (clé, mot de passe, adresse LAN réelle) dans un
@@ -79,17 +139,27 @@ soit lancée via `/ouvrir`, `/clore` ou une demande ordinaire.
 
 ## Format de document
 
-Cette règle vise **les documents de référence du kit** (README, SECURITY,
-CREDITS, et toute nouvelle note de politique). Elle ne s'applique **pas** aux
-fiches projet, synthèses, index et journaux, qui suivent leurs propres modèles
-dans `templates/` : n'y ajoute jamais de cartouche.
+Deux niveaux de cartouche. Le second n'est pas une dispense du premier : c'est
+la même exigence de traçabilité, proportionnée à l'objet.
 
-Pour un document de référence :
+**Documents de référence du kit** — README, SECURITY, CREDITS, toute note de
+politique. Cartouche complet :
 
-- En-tête : Nom de l'organisation, Référence, Classification, Version, Date d'application, Propriétaire, Approbateur, Prochaine révision
+- Nom de l'organisation, Référence, Classification, Version, Date d'application, Propriétaire, Approbateur, Prochaine révision
 - Mention d'état : `- **État :** brouillon`, puis `approuvé` après approbation
-- Un saut de ligne après chaque information du cartouche
-- Ne jamais laisser un champ entre crochets : un champ inconnu se demande.
+- Un saut de ligne après chaque information
+
+**Objets du vault** — fiches projet et synthèses. Cartouche proportionné, défini
+dans `templates/projet.md` et `templates/synthese.md` : identifiant,
+classification, propriétaire, date de création, date de mise à jour, et
+éventuelle date de prochaine revue. Ni approbateur ni numéro de version : ces
+objets vivent en continu et c'est leur journal qui porte l'historique.
+
+**Index et journaux** ne portent pas de cartouche : leur traçabilité tient à
+leurs lignes datées. Les exigences de la section « Traçabilité et classification
+du vault » s'y appliquent malgré tout.
+
+Ne jamais laisser un champ entre crochets : un champ inconnu se demande.
 
 ## Normes et références
 

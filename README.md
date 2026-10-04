@@ -5,6 +5,12 @@ et un modèle d'IA exécuté sur le LAN ou sur la machine locale (API compatible
 OpenAI). Les fichiers Markdown sont la mémoire durable : la conversation ne
 sert jamais à la reprise.
 
+**Trois principes :** outils open source, données souveraines, démarche
+ISO/IEC 27001. Ils gouvernent aussi le vault produit, pas seulement ce dépôt :
+chaque fiche et chaque synthèse porte une classification, un propriétaire et ses
+dates, et chaque fait enregistré a une origine identifiable. Aucune conformité ni
+certification n'est revendiquée.
+
 Racines Systèmes — second-cerveau-opencode
 Référence : PROJ-001
 Classification : Public

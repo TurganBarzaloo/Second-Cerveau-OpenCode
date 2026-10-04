@@ -10,6 +10,11 @@
 > vous-même.
 
 - **Identifiant :** P001
+- **Classification :** public — données entièrement fictives, publiées avec le kit
+- **Propriétaire :** Stéphane Muraro
+- **Créée le :** 2026-10-04 · **Mise à jour le :** 2026-10-05
+- **Prochaine revue :** non fixée
+
 - **Objectif :** produire une fiche d'accueil fiable pour l'atelier fictif du 14 octobre 2026, qui attend 18 participants.
 - **Critère de fin :** la fiche d'accueil est rédigée, chaque information est reliée à une source, et la capacité d'accueil est soit confirmée, soit explicitement signalée comme non établie.
 - **État :** à lancer

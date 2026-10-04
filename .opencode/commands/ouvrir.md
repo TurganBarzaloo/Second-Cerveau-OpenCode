@@ -35,9 +35,15 @@ C'est la seule écriture permise par cette commande, et seulement après mon cho
 
 ## Réponse — quelques lignes, pas plus
 
-Objectif · critère de fin · état · dernière action connue avec sa date ·
-blocage éventuel et l'identifiant de sa tâche · prochaine action, **avec sa
-mention « proposée » ou « décidée » reprise telle quelle**.
+Classification · objectif · critère de fin · état · dernière action connue avec
+sa date · blocage éventuel et l'identifiant de sa tâche · prochaine action,
+**avec sa mention « proposée » ou « décidée » reprise telle quelle**.
+
+Signale, sans rien modifier :
+
+- une **revue échue** (date de prochaine revue dépassée) ;
+- une **classification manquante** : demande-la avant d'écrire quoi que ce soit
+  dans cette fiche par la suite.
 
 Élément absent de la fiche → « indéterminé ». Fiche introuvable → dis-le.
 N'invente rien.
