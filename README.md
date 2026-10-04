@@ -5,16 +5,16 @@ et un modèle d'IA exécuté sur le LAN ou sur la machine locale (API compatible
 OpenAI). Les fichiers Markdown sont la mémoire durable : la conversation ne
 sert jamais à la reprise.
 
-[Nom de l’organisation]	[second-cerveau-opencode]
-Référence : [PROJ-001]
-Classification : [Confidentiel]
-Version : [1.0]
-Date d’application : [04/10/2026 09h00:00]
-Propriétaire : [Développeur]
-Approbateur : [Chef de projet]
-Prochaine révision : [04/10/2027 09h00:00]
+Racines Systèmes — second-cerveau-opencode
+Référence : PROJ-001
+Classification : Public
+Version : 1.0
+Date d’application : 04/10/2026
+Propriétaire : Stéphane Muraro
+Approbateur : Stéphane Muraro
+Prochaine révision : 04/10/2027
 
-- **État :** brouillon
+- **État :** approuvé
 
 - Un seul agent d'exécution, un seul modèle, un projet pilote fictif.
 - **Pour démarrer : [examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md)**,
