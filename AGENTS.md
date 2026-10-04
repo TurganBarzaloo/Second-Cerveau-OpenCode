@@ -142,12 +142,17 @@ prochaine revue. À l'ouverture, signaler une revue échue — sans rien modifie
 Deux niveaux de cartouche. Le second n'est pas une dispense du premier : c'est
 la même exigence de traçabilité, proportionnée à l'objet.
 
-**Documents de référence du kit** — README, SECURITY, CREDITS, toute note de
-politique. Cartouche complet :
+**Règle de forme commune aux deux niveaux : une information par ligne, écrite en
+liste Markdown** (`- **Champ :** valeur`). C'est impératif pour la lisibilité : en
+Markdown, des lignes simplement consécutives sont **fusionnées** au rendu et le
+cartouche s'affiche alors comme une seule phrase continue. Ne pas compter sur des
+espaces en fin de ligne, invisibles et souvent supprimés par les éditeurs.
 
-- Nom de l'organisation, Référence, Classification, Version, Date d'application, Propriétaire, Approbateur, Prochaine révision
+**Documents de référence du kit** — README, SECURITY, CREDITS, toute note de
+politique. Cartouche complet, une ligne par champ :
+
+- Organisation, Référence, Classification, Version, Date d'application, Propriétaire, Approbateur, Prochaine révision
 - Mention d'état : `- **État :** brouillon`, puis `approuvé` après approbation
-- Un saut de ligne après chaque information
 
 **Objets du vault** — fiches projet et synthèses. Cartouche proportionné, défini
 dans `templates/projet.md` et `templates/synthese.md` : identifiant,

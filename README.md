@@ -11,15 +11,14 @@ chaque fiche et chaque synthèse porte une classification, un propriétaire et s
 dates, et chaque fait enregistré a une origine identifiable. Aucune conformité ni
 certification n'est revendiquée.
 
-Racines Systèmes — second-cerveau-opencode
-Référence : PROJ-001
-Classification : Public
-Version : 1.0
-Date d’application : 04/10/2026
-Propriétaire : Stéphane Muraro
-Approbateur : Stéphane Muraro
-Prochaine révision : 04/10/2027
-
+- **Organisation :** Racines Systèmes — second-cerveau-opencode
+- **Référence :** PROJ-001
+- **Classification :** Public
+- **Version :** 1.0
+- **Date d'application :** 04/10/2026
+- **Propriétaire :** Stéphane Muraro
+- **Approbateur :** Stéphane Muraro
+- **Prochaine révision :** 04/10/2027
 - **État :** approuvé
 
 - Un seul agent d'exécution, un seul modèle, un projet pilote fictif.

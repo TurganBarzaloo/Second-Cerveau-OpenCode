@@ -6,7 +6,8 @@
 - **Identifiant :** PXXX
 - **Classification :** public | interne | confidentiel
 - **Propriétaire :** <qui répond de ce projet>
-- **Créée le :** AAAA-MM-JJ · **Mise à jour le :** AAAA-MM-JJ
+- **Créée le :** AAAA-MM-JJ
+- **Mise à jour le :** AAAA-MM-JJ
 - **Prochaine revue :** AAAA-MM-JJ, ou « non fixée »
 
 - **Objectif :** <résultat attendu, en une phrase>

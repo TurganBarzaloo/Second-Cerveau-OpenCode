@@ -3,10 +3,11 @@
 > **SYNTHÈSE PRODUITE PAR L'IA** — distincte des sources originales.
 > Chaque fait renvoie à sa source et au passage utilisé.
 >
-> **Classification :** public | interne | confidentiel — reprendre le niveau le
-> plus élevé des sources intégrées ; résumer ne déclasse pas.
-> **Propriétaire :** <qui répond de cette page>
-> **Créée le :** AAAA-MM-JJ · **Mise à jour le :** AAAA-MM-JJ
+> - **Classification :** public | interne | confidentiel — reprendre le niveau le
+>   plus élevé des sources intégrées ; résumer ne déclasse pas.
+> - **Propriétaire :** <qui répond de cette page>
+> - **Créée le :** AAAA-MM-JJ
+> - **Mise à jour le :** AAAA-MM-JJ
 
 Ces sections sont **obligatoires** et ne se suppriment pas, même vides : écrire
 « aucune » est une information, les retirer en est une perte. Une synthèse n'est

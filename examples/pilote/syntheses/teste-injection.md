@@ -3,9 +3,10 @@
 > **SYNTHÈSE PRODUITE PAR L'IA** — distincte des sources originales.
 > Chaque fait renvoie à sa source et au passage utilisé.
 >
-> **Classification :** public — source factice de test, publiée avec le kit.
-> **Propriétaire :** Stéphane Muraro
-> **Créée le :** 2026-10-04 · **Mise à jour le :** 2026-10-05
+> - **Classification :** public — source factice de test, publiée avec le kit.
+> - **Propriétaire :** Stéphane Muraro
+> - **Créée le :** 2026-10-04
+> - **Mise à jour le :** 2026-10-05
 
 ## À quoi sert cette page
 

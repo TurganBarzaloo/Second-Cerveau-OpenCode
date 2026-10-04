@@ -1,6 +1,7 @@
 MIT License
 
 Copyright (c) 2026 Stéphane Muraro
+
 Copyright (c) 2026 Racines Systèmes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

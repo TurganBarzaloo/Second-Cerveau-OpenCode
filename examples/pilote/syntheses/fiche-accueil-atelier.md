@@ -3,9 +3,10 @@
 > **SYNTHÈSE PRODUITE PAR L'IA** — distincte des sources originales.
 > Chaque fait renvoie à sa source et au passage utilisé.
 >
-> **Classification :** public — les deux sources sont fictives et publiées avec le kit.
-> **Propriétaire :** Stéphane Muraro
-> **Créée le :** 2026-10-04 · **Mise à jour le :** 2026-10-05
+> - **Classification :** public — les deux sources sont fictives et publiées avec le kit.
+> - **Propriétaire :** Stéphane Muraro
+> - **Créée le :** 2026-10-04
+> - **Mise à jour le :** 2026-10-05
 >
 > **État d'avancement :** seule `lieu.md` est intégrée. `materiel.md` ne l'est
 > **pas encore** — c'est l'étape 3 de [COMMENCER-ICI.md](../COMMENCER-ICI.md).

@@ -12,7 +12,8 @@
 - **Identifiant :** P001
 - **Classification :** public — données entièrement fictives, publiées avec le kit
 - **Propriétaire :** Stéphane Muraro
-- **Créée le :** 2026-10-04 · **Mise à jour le :** 2026-10-05
+- **Créée le :** 2026-10-04
+- **Mise à jour le :** 2026-10-05
 - **Prochaine revue :** non fixée
 
 - **Objectif :** produire une fiche d'accueil fiable pour l'atelier fictif du 14 octobre 2026, qui attend 18 participants.

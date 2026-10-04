@@ -1,14 +1,13 @@
 # Crédits et provenance
 
-Racines Systèmes — second-cerveau-opencode
-Référence : CRD-001
-Classification : Public
-Version : 1.0
-Date d’application : 04/10/2026
-Propriétaire : Stéphane Muraro
-Approbateur : Stéphane Muraro
-Prochaine révision : 04/10/2027
-
+- **Organisation :** Racines Systèmes — second-cerveau-opencode
+- **Référence :** CRD-001
+- **Classification :** Public
+- **Version :** 1.0
+- **Date d'application :** 04/10/2026
+- **Propriétaire :** Stéphane Muraro
+- **Approbateur :** Stéphane Muraro
+- **Prochaine révision :** 04/10/2027
 - **État :** brouillon
 
 ## Influences conceptuelles (aucun fichier copié)
