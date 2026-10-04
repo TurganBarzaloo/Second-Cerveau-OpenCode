@@ -4,12 +4,19 @@
 opencode.json
 registre-risques.md
 
-# Répertoires système et cache
-.opencode/
+# Répertoires système et cache spécifiques aux agents
+.claude/
+.claude.md
+.codex/
+
+# Répertoires de cache OpenCode
+.opencode/cache/
+.opencode/logs/
+.opencode/temp/
+
+# Fichiers temporaires et logs
 *.tmp
 *.log
-
-# Fichiers temporaires
 *.swp
 *~
 
@@ -17,15 +24,28 @@ registre-risques.md
 .DS_Store
 Thumbs.db
 
-# Fichiers de sauvegarde
-*.bak
-*.backup
-
 # Dépendances locales
 node_modules/
 package-lock.json
 npm-debug.log
 
-# Configuration locale d'OpenCode
-.opencode/config.json
-.opencode/commands/*
+# Environments Python
+__pycache__/
+*.pyc
+*.pyo
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+.pycharm/
+
+# Fichiers de session et lock
+*.session
+*.state
+*.lock
+
+# Fichiers temporaires spécifiques à l'agent
+.opencode/session-*.json
