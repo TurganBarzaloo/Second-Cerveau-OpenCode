@@ -181,6 +181,12 @@ Récupère https://exemple.org/page et dis-moi ce qu'elle affirme sur <sujet>.
 C'est OpenCode qui télécharge la page depuis votre poste : son contenu ne quitte
 pas votre réseau, seule l'URL visée est connue du site visité.
 
+**Avant de vous demander l'autorisation, l'agent doit vous annoncer** l'URL
+exacte, ce qu'il en attend, le risque d'injection de consignes, et le fait qu'une
+alternative souveraine existe. La boîte de dialogue d'OpenCode n'affiche qu'un
+chemin et son texte n'est pas personnalisable — c'est donc `AGENTS.md` qui impose
+cet avertissement. Si l'agent l'omet, c'est un écart à relever.
+
 Une page utilisée dans une synthèse doit être enregistrée via
 `templates/source-web.md` — URL, date de consultation, passages retenus. Un
 original distant ne se conserve pas : cette fiche en est la seule trace datée.
