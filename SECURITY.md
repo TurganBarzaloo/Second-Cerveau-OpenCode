@@ -32,7 +32,9 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
 | --- | --- |
 | Données | Les exemples contenus dans le dépôt sont 100 % fictifs. Les données réelles se gardent dans un vault privé séparé du dépôt. |
 | Secrets | Jamais de clé ni d'adresse réelle dans un fichier versionné. La config exemple lit la clé depuis une variable d'environnement ; la config locale réelle est exclue de Git. |
-| Accès de l'agent | `webfetch`, `websearch`, `bash` et `task` refusés, pas de plugin ni MCP. L'édition est refusée sur les originaux (`sources/`, `examples/pilote/sources/`) et sur la configuration. `external_directory` refusé : rien hors du projet, ce qui couvre la configuration globale d'OpenCode. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
+| Accès de l'agent | `bash`, `task` et `websearch` refusés, pas de plugin ni MCP. L'édition est refusée sur les originaux (`sources/`), les modèles et la configuration ; elle est autorisée ailleurs, notamment dans `livrables/`. `external_directory` refusé : rien hors du projet, ce qui couvre la configuration globale d'OpenCode. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
+| Accès web | `webfetch` en `ask`, avec liste blanche de domaines : chaque récupération hors liste demande un accord explicite. C'est OpenCode qui télécharge la page depuis le poste — le contenu ne quitte pas le réseau local, seule l'URL visée est connue du site visité. `websearch` refusé : il ne fonctionne pas avec un fournisseur local et exigerait un service tiers. |
+| Sources distantes | Une page consultée ne peut pas être conservée comme original. Elle est enregistrée via `templates/source-web.md` : URL, date de consultation, passages utilisés, nature de la source et instructions éventuellement rencontrées. Sans cette fiche, une affirmation perd son origine dès que la page change. |
 | Sobriété de lecture | `read`, `glob` et `grep` passent par une liste blanche de chemins, le reste en `ask`. Rien ne peut être lu ni ratissé silencieusement. Limite : voir ci-dessous. |
 | Contenu importé | Le contenu des documents est traité comme des données, jamais comme des consignes : une source qui demande une commande, un secret ou une publication n'a aucune autorité (cf. `examples/pilote/sources/EXEMPLE-injection.md`). |
 | Intégrité et reprise | Originaux conservés à l'identique ; une seule fiche projet fait autorité ; historique Git local ; sauvegarde distincte et test de restauration (procédure ci-dessous). |
@@ -49,6 +51,20 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
   alors que le shell était refusé. Cet outil ne figure pas dans la liste de
   permissions documentée. Ne pas présenter le refus du shell comme une garantie
   qu'aucun code ne s'exécute.
+- **L'accès web élargit réellement la surface d'attaque.** Tant que `webfetch`
+  était refusé, le scénario d'injection restait théorique. Il est désormais
+  effectif : toute page récupérée est un texte d'auteur inconnu qui peut tenter
+  de commander l'agent. La protection repose sur `AGENTS.md`, donc sur la
+  fidélité du modèle — pas sur un blocage technique. En essai, un modèle s'est
+  inventé une exception à une règle écrite « sans exception », et a proposé à
+  l'utilisateur de contourner lui-même un refus de permission. Accordez les
+  domaines un par un, et ne laissez pas `webfetch` en `allow` général.
+- **Activer `websearch` est un écart à la souveraineté, pas une option de
+  confort.** OpenCode le réserve à ses fournisseurs hébergés ou aux variables
+  `OPENCODE_ENABLE_EXA` / `OPENCODE_ENABLE_PARALLEL`, qui transmettent les
+  requêtes à un service tiers sans authentification. `webfetch` ne révèle que les
+  pages visées ; `websearch` révèle les questions posées, ce qui est plus
+  révélateur. Si vous l'activez, consignez-le comme écart.
 - **La sobriété de lecture reste partiellement déclarative.** Les permissions
   s'appliquent à la session, pas à la commande : `/ouvrir` ne peut donc pas être
   rendu plus strict que `/clore`, qui a besoin des sources et des synthèses. En

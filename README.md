@@ -44,8 +44,20 @@ opencode.example.jsonc  configuration générique (valeurs fictives)
 .opencode/commands/  /ouvrir et /clore
 templates/projet.md  modèle de fiche projet
 templates/synthese.md  modèle de synthèse (structure à préserver)
+templates/source-web.md  modèle de fiche pour une page consultée en ligne
 examples/pilote/     mini-vault Obsidian fictif (P001 + 2 sources + synthèse)
+examples/pilote/livrables/  là où l'agent dépose ce qu'il produit
 ```
+
+Un vault comporte cinq dossiers, aux rôles distincts :
+
+| Dossier | Rôle | Qui écrit |
+| --- | --- | --- |
+| `projets/` | une fiche par projet, autorité sur ses tâches | l'agent et vous |
+| `sources/` | originaux reçus, preuves de ce qu'ils affirment | personne — immuables |
+| `syntheses/` | ce que l'IA a compris des sources, chaque fait référencé | l'agent |
+| `livrables/` | ce que le projet produit pour l'extérieur | l'agent |
+| `templates/` | modèles | vous |
 
 La configuration locale réelle (`opencode.json`) et le registre privé des
 risques sont **exclus de Git** (voir `.gitignore`).
@@ -147,6 +159,39 @@ Exemple complet et résultat attendu : étapes 4 et 5 de
 - Question : « D'après les sources du pilote, à quel étage se trouve la salle A ? »
 - Enregistrement d'une réponse : uniquement si vous le demandez explicitement.
 
+### Produire des fichiers
+
+L'agent écrit ses productions dans `livrables/` : documents rédigés, exports,
+maquettes. C'est le dossier prévu pour ça — `sources/` et `templates/` lui sont
+refusés en écriture, et c'est voulu.
+
+Un fichier présent dans `livrables/` ne veut pas dire qu'une tâche est faite :
+c'est la fiche projet qui en décide.
+
+### Chercher sur le web
+
+`webfetch` est en `ask` avec une liste blanche de domaines dans
+`opencode.example.jsonc`. Demandez explicitement une page, et l'agent vous
+demandera l'accord si le domaine n'est pas déjà autorisé :
+
+```
+Récupère https://exemple.org/page et dis-moi ce qu'elle affirme sur <sujet>.
+```
+
+C'est OpenCode qui télécharge la page depuis votre poste : son contenu ne quitte
+pas votre réseau, seule l'URL visée est connue du site visité.
+
+Une page utilisée dans une synthèse doit être enregistrée via
+`templates/source-web.md` — URL, date de consultation, passages retenus. Un
+original distant ne se conserve pas : cette fiche en est la seule trace datée.
+
+**`websearch` ne fonctionne pas avec un modèle local.** OpenCode le réserve à ses
+fournisseurs hébergés, ou aux variables `OPENCODE_ENABLE_EXA` /
+`OPENCODE_ENABLE_PARALLEL` qui transmettent vos requêtes à un service tiers sans
+authentification. `webfetch` ne révèle que les pages visées ; `websearch`
+révélerait vos questions. Si vous l'activez, c'est un écart assumé à la
+souveraineté des données : consignez-le.
+
 ### Vault privé (projet réel)
 
 Le vault réel reste séparé de ce dépôt. Parcours pour l'utiliser avec le kit :
@@ -156,10 +201,18 @@ Le vault réel reste séparé de ce dépôt. Parcours pour l'utiliser avec le ki
    (`ouvrir.md`, `clore.md`) et la configuration locale `opencode.json`
    (protections du projet + modèle ; celle créée à l'étape 3 de l'installation,
    ou recréée depuis `opencode.example.jsonc` si elle est indisponible).
-3. Créer le projet : copier `templates/projet.md` dans `vault-prive/projets/`,
-   renommer PXXX avec le prochain identifiant libre.
-4. Lancer `opencode` à la racine de `vault-prive/` : les commandes, les règles
+3. Créer les dossiers de travail : `projets/`, `sources/`, `syntheses/` et
+   `livrables/`. Sans `livrables/`, l'agent n'a nulle part où déposer ce qu'il
+   produit.
+4. Créer le projet : copier `templates/projet.md` dans `vault-prive/projets/`,
+   renommer PXXX avec le prochain identifiant libre. Copier aussi
+   `templates/synthese.md` et `templates/source-web.md`.
+5. Lancer `opencode` à la racine de `vault-prive/` : les commandes, les règles
    et les permissions du kit s'appliquent alors au vault.
+6. **Y faire un `git init`.** Le vault n'a pas de dépôt distant et ne doit jamais
+   en recevoir, mais un dépôt local rend chaque écriture de l'agent réversible :
+   une synthèse écrasée se retrouve par `git restore`. Un crochet `pre-push` qui
+   refuse tout envoi est une précaution utile.
 
 Sélection de la fiche :
 
@@ -174,6 +227,9 @@ Sélection de la fiche :
 - Pilote : un seul projet, un seul modèle, deux rituels. Le multi-projets
   automatisé, les agents spécialisés, le MCP, les connecteurs et les
   automatisations sont différés (un besoin observé justifiera un ajout).
+- L'accès web rend l'injection de consignes **effective et non plus théorique** :
+  une page récupérée est un texte d'auteur inconnu. La protection repose sur
+  `AGENTS.md`, donc sur la fidélité du modèle. Accordez les domaines un par un.
 - Les permissions OpenCode ne sont pas une isolation technique (voir
   [SECURITY.md](SECURITY.md), limites connues).
 - Aucune vérification de l'API LAN n'est incluse : authentification, transport

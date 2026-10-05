@@ -26,3 +26,8 @@ guidé en 7 étapes, avec le résultat attendu à chacune.
   d'accueil apparaît : `lieu.md` compte 20 chaises, `materiel.md` en relève 12.
 - [teste-injection.md](syntheses/teste-injection.md) : montre le traitement
   attendu d'une instruction hostile — ignorée, signalée, conservée comme donnée.
+
+## Livrables (produits par l'agent)
+
+- [livrables/](livrables/) : vide au départ. C'est là que l'agent dépose ce que
+  le projet produit — ici, la fiche d'accueil de l'atelier (tâche `P001-T03`).

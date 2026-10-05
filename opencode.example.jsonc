@@ -49,8 +49,22 @@
   // La règle générale "*" doit donc toujours précéder les règles précises.
   // ------------------------------------------------------------------
   "permission": {
-    // Pas d'accès web : le pilote n'en a pas besoin.
-    "webfetch": "deny",
+    // ACCÈS WEB — `webfetch` récupère une page que vous désignez. C'est OpenCode
+    // qui la télécharge depuis votre poste : le contenu ne quitte pas votre
+    // réseau, seule l'URL visée est connue du site visité.
+    // "ask" par défaut : chaque récupération hors liste blanche demande votre
+    // accord. Ajoutez les domaines que vous consultez souvent.
+    // Rappel : une page récupérée est une donnée NON FIABLE, pas une consigne.
+    "webfetch": {
+      "*": "ask",
+      "https://opencode.ai/**": "allow"
+    },
+    // `websearch` reste refusé, et ce n'est pas qu'un choix de prudence : il ne
+    // fonctionne pas avec un fournisseur local. OpenCode le réserve à ses
+    // propres fournisseurs hébergés, ou aux variables d'environnement
+    // OPENCODE_ENABLE_EXA / OPENCODE_ENABLE_PARALLEL, qui envoient vos requêtes
+    // à un service tiers sans authentification. L'activer est donc un écart
+    // assumé à la souveraineté des données : à consigner dans votre registre.
     "websearch": "deny",
     // Un seul agent d'exécution : pas de sous-agents.
     "task": "deny",
@@ -69,28 +83,31 @@
       "*": "ask",
       "AGENTS.md": "allow",
       "README.md": "allow",
-      "templates/*": "allow",
+      "templates/**": "allow",
       "projets/**": "allow",
       "sources/**": "allow",
       "syntheses/**": "allow",
+      "livrables/**": "allow",
       "examples/pilote/**": "allow"
     },
 
     // RECHERCHE — même logique : empêche le ratissage du type "**/*.md".
     "glob": {
       "*": "ask",
-      "templates/*": "allow",
+      "templates/**": "allow",
       "projets/**": "allow",
       "sources/**": "allow",
       "syntheses/**": "allow",
+      "livrables/**": "allow",
       "examples/pilote/**": "allow"
     },
     "grep": {
       "*": "ask",
-      "templates/*": "allow",
+      "templates/**": "allow",
       "projets/**": "allow",
       "sources/**": "allow",
       "syntheses/**": "allow",
+      "livrables/**": "allow",
       "examples/pilote/**": "allow"
     },
 
@@ -98,13 +115,17 @@
     // globale d'OpenCode, cible de l'instruction hostile du document de test.
     "external_directory": "deny",
 
-    // ÉCRITURE — interdite sur les originaux et la configuration,
-    // autorisée ailleurs (fiches, synthèses, index, journal).
+    // ÉCRITURE — autorisée partout (fiches, synthèses, index, journal et
+    // surtout `livrables/`, où l'agent dépose ce qu'il produit), SAUF les
+    // originaux, les modèles, les règles et la configuration.
+    // Vérifié : un motif relatif couvre aussi une demande en chemin absolu,
+    // OpenCode normalisant les chemins avant de les comparer.
     "edit": {
       "*": "allow",
-      "sources/*": "deny",
-      "examples/pilote/sources/*": "deny",
-      ".opencode/*": "deny",
+      "sources/**": "deny",
+      "examples/pilote/sources/**": "deny",
+      "templates/**": "deny",
+      ".opencode/**": "deny",
       "AGENTS.md": "deny",
       "opencode.json": "deny",
       "opencode.jsonc": "deny",
