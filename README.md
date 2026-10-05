@@ -185,12 +185,68 @@ Une page utilisée dans une synthèse doit être enregistrée via
 `templates/source-web.md` — URL, date de consultation, passages retenus. Un
 original distant ne se conserve pas : cette fiche en est la seule trace datée.
 
-**`websearch` ne fonctionne pas avec un modèle local.** OpenCode le réserve à ses
-fournisseurs hébergés, ou aux variables `OPENCODE_ENABLE_EXA` /
-`OPENCODE_ENABLE_PARALLEL` qui transmettent vos requêtes à un service tiers sans
-authentification. `webfetch` ne révèle que les pages visées ; `websearch`
-révélerait vos questions. Si vous l'activez, c'est un écart assumé à la
-souveraineté des données : consignez-le.
+`websearch` est en `ask` mais **ne fonctionne pas tel quel avec un modèle local** :
+OpenCode le réserve à ses fournisseurs hébergés, ou aux variables
+`OPENCODE_ENABLE_EXA` / `OPENCODE_ENABLE_PARALLEL`. Il passe alors par un service
+tiers hébergé, sans authentification. Avant de l'activer, lisez les quatre faits
+listés dans [SECURITY.md](SECURITY.md) — en particulier celui-ci : **la requête
+n'est pas rédigée par vous mais par le modèle**, à partir de votre fiche projet et
+de vos synthèses.
+
+### Recherche souveraine : SearXNG sur votre réseau
+
+Pour garder la capacité de recherche sans flux vers un tiers, hébergez
+[SearXNG](https://github.com/searxng/searxng) sur votre réseau et interrogez-le
+avec `webfetch`. Le point de sortie devient **votre** serveur, et vous voyez la
+requête puisque c'est vous qui construisez l'URL.
+
+**1. Lancer SearXNG** (exemple Docker, adaptez l'hôte et le port) :
+
+```bash
+docker run -d --name searxng -p 8080:8080 \
+  -v ./searxng:/etc/searxng \
+  -e SEARXNG_BASE_URL=http://searxng.lan:8080/ \
+  searxng/searxng
+```
+
+**2. Activer la sortie JSON** — c'est l'étape qui manque le plus souvent :
+SearXNG ne sert que du HTML par défaut. Dans `searxng/settings.yml` :
+
+```yaml
+search:
+  formats:
+    - html
+    - json
+```
+
+Si les requêtes sont refusées, vérifiez aussi `server.limiter` : le limiteur
+anti-robot peut bloquer les appels automatisés sur un réseau interne.
+Redémarrez le conteneur après modification.
+
+**3. Autoriser votre instance** dans `opencode.json` :
+
+```jsonc
+"webfetch": {
+  "*": "ask",
+  "http://searxng.lan:8080/**": "allow"
+}
+```
+
+**4. Chercher** :
+
+```
+Récupère http://searxng.lan:8080/search?q=<termes>&format=json
+et dis-moi ce que les résultats affirment sur <sujet>.
+```
+
+Puis récupérez les pages intéressantes, et enregistrez celles qui servent une
+synthèse via `templates/source-web.md`.
+
+**Soyez exact sur le gain.** Les moteurs en amont reçoivent toujours le texte de
+la requête — mais depuis l'IP de votre SearXNG, sans lien avec votre poste ni
+votre session, et avec les moteurs que *vous* avez choisis. C'est un vrai
+progrès, pas une étanchéité. Vérifiez la documentation officielle de SearXNG :
+ses options évoluent.
 
 ### Vault privé (projet réel)
 

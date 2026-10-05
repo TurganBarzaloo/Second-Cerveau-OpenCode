@@ -59,13 +59,17 @@
       "*": "ask",
       "https://opencode.ai/**": "allow"
     },
-    // `websearch` reste refusé, et ce n'est pas qu'un choix de prudence : il ne
-    // fonctionne pas avec un fournisseur local. OpenCode le réserve à ses
-    // propres fournisseurs hébergés, ou aux variables d'environnement
-    // OPENCODE_ENABLE_EXA / OPENCODE_ENABLE_PARALLEL, qui envoient vos requêtes
-    // à un service tiers sans authentification. L'activer est donc un écart
-    // assumé à la souveraineté des données : à consigner dans votre registre.
-    "websearch": "deny",
+    // `websearch` en "ask" : chaque recherche demande votre accord.
+    // Il ne fonctionne pas tel quel avec un fournisseur local — OpenCode le
+    // réserve à ses fournisseurs hébergés, ou aux variables d'environnement
+    // OPENCODE_ENABLE_EXA / OPENCODE_ENABLE_PARALLEL. Il passe alors par un
+    // service tiers hébergé, sans authentification.
+    // Point souvent ignoré : la requête est rédigée par le MODÈLE depuis son
+    // contexte (fiche projet, synthèses), pas par vous. Lisez SECURITY.md,
+    // rubrique « websearch : ce qu'il fait exactement », avant d'activer.
+    // Alternative réellement souveraine : SearXNG sur votre réseau interrogé
+    // par webfetch — voir « Recherche souveraine » dans le README.
+    "websearch": "ask",
     // Un seul agent d'exécution : pas de sous-agents.
     "task": "deny",
     // Pas de shell : inutile au travail Markdown, et voie de contournement de

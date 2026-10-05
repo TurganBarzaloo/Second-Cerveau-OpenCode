@@ -59,12 +59,31 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
   inventé une exception à une règle écrite « sans exception », et a proposé à
   l'utilisateur de contourner lui-même un refus de permission. Accordez les
   domaines un par un, et ne laissez pas `webfetch` en `allow` général.
-- **Activer `websearch` est un écart à la souveraineté, pas une option de
-  confort.** OpenCode le réserve à ses fournisseurs hébergés ou aux variables
-  `OPENCODE_ENABLE_EXA` / `OPENCODE_ENABLE_PARALLEL`, qui transmettent les
-  requêtes à un service tiers sans authentification. `webfetch` ne révèle que les
-  pages visées ; `websearch` révèle les questions posées, ce qui est plus
-  révélateur. Si vous l'activez, consignez-le comme écart.
+- **`websearch` : ce qu'il fait exactement.** OpenCode le réserve à ses propres
+  fournisseurs hébergés, ou l'active via `OPENCODE_ENABLE_EXA` /
+  `OPENCODE_ENABLE_PARALLEL`. Dans ce cas, selon sa documentation, « the tool
+  connects directly to the backend's hosted MCP service without authentication ».
+  Quatre faits en découlent, à peser vous-même :
+  1. **Un flux sortant vers un tiers hébergé** apparaît — le seul de
+     l'installation, puisque le modèle est local.
+  2. **La requête n'est pas rédigée par vous mais par le modèle**, à partir de son
+     contexte : fiche projet, synthèses, corpus. Dans un navigateur vous savez ce
+     qui sort ; ici, vous ne choisissez pas la formulation.
+  3. **Une requête est plus révélatrice qu'une URL.** `webfetch` indique à un site
+     qu'une page a été consultée ; une requête indique à un tiers ce que vous
+     cherchez à savoir, dans vos termes.
+  4. **« Sans authentification » n'est pas « anonyme ».** Aucun compte, donc rien
+     n'est rattaché à une identité — mais l'adresse IP part, et surtout il n'y a
+     **aucun contrat** : pas de conditions acceptées, pas de responsable de
+     traitement identifié, pas de rétention annoncée ni de droit à l'effacement.
+     Un sous-traitant sans conditions lisibles est plus difficile à documenter
+     qu'un fournisseur sous contrat.
+
+  Ce n'est pas une faille, c'est un compromis. En `ask`, chaque appel demande
+  votre accord ; vérifiez à la première requête si OpenCode vous la **montre**
+  avant l'envoi — si oui, l'objection 2 tombe en grande partie. Si vous l'activez,
+  consignez-le au registre avec ces quatre faits. Une alternative réellement
+  souveraine existe : voir « Recherche souveraine » dans le README.
 - **La sobriété de lecture reste partiellement déclarative.** Les permissions
   s'appliquent à la session, pas à la commande : `/ouvrir` ne peut donc pas être
   rendu plus strict que `/clore`, qui a besoin des sources et des synthèses. En
