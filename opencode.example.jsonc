@@ -52,13 +52,11 @@
     // ACCÈS WEB — `webfetch` récupère une page que vous désignez. C'est OpenCode
     // qui la télécharge depuis votre poste : le contenu ne quitte pas votre
     // réseau, seule l'URL visée est connue du site visité.
-    // "ask" par défaut : chaque récupération hors liste blanche demande votre
-    // accord. Ajoutez les domaines que vous consultez souvent.
+    // Ce champ n'accepte qu'une action plate ("allow", "ask" ou "deny") dans
+    // OpenCode 2.0.x : pas de liste blanche par domaine. En "ask", chaque
+    // récupération demande votre accord.
     // Rappel : une page récupérée est une donnée NON FIABLE, pas une consigne.
-    "webfetch": {
-      "*": "ask",
-      "https://opencode.ai/**": "allow"
-    },
+    "webfetch": "ask",
     // `websearch` en "ask" : chaque recherche demande votre accord.
     // Il ne fonctionne pas tel quel avec un fournisseur local — OpenCode le
     // réserve à ses fournisseurs hébergés, ou aux variables d'environnement

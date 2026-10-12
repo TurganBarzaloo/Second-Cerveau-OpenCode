@@ -33,7 +33,7 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
 | Données | Les exemples contenus dans le dépôt sont 100 % fictifs. Les données réelles se gardent dans un vault privé séparé du dépôt. |
 | Secrets | Jamais de clé ni d'adresse réelle dans un fichier versionné. La config exemple lit la clé depuis une variable d'environnement ; la config locale réelle est exclue de Git. |
 | Accès de l'agent | `bash`, `task` et `websearch` refusés, pas de plugin ni MCP. L'édition est refusée sur les originaux (`sources/`), les modèles et la configuration ; elle est autorisée ailleurs, notamment dans `livrables/`. `external_directory` refusé : rien hors du projet, ce qui couvre la configuration globale d'OpenCode. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
-| Accès web | `webfetch` en `ask`, avec liste blanche de domaines : chaque récupération hors liste demande un accord explicite. C'est OpenCode qui télécharge la page depuis le poste — le contenu ne quitte pas le réseau local, seule l'URL visée est connue du site visité. `websearch` également en `ask`, avec les réserves décrites plus bas. |
+| Accès web | `webfetch` en `ask` (action unique, sans liste blanche dans OpenCode 2.0.x) : chaque récupération demande un accord explicite. C'est OpenCode qui télécharge la page depuis le poste — le contenu ne quitte pas le réseau local, seule l'URL visée est connue du site visité. `websearch` également en `ask`, avec les réserves décrites plus bas. |
 | Avertissement avant récupération | La boîte de dialogue d'autorisation d'OpenCode n'affiche qu'un chemin : son texte n'est pas personnalisable, une permission n'acceptant que `allow`, `ask` ou `deny`. `AGENTS.md` impose donc à l'agent d'annoncer lui-même, **avant** de déclencher la demande : l'URL exacte, l'usage prévu, le risque d'injection, et l'existence d'une alternative souveraine. Vous décidez en connaissance de cause plutôt que devant un simple nom de domaine. |
 | Sources distantes | Une page consultée ne peut pas être conservée comme original. Elle est enregistrée via `templates/source-web.md` : URL, date de consultation, passages utilisés, nature de la source et instructions éventuellement rencontrées. Sans cette fiche, une affirmation perd son origine dès que la page change. |
 | Sobriété de lecture | `read`, `glob` et `grep` passent par une liste blanche de chemins, le reste en `ask`. Rien ne peut être lu ni ratissé silencieusement. Limite : voir ci-dessous. |
@@ -59,7 +59,7 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
   fidélité du modèle — pas sur un blocage technique. En essai, un modèle s'est
   inventé une exception à une règle écrite « sans exception », et a proposé à
   l'utilisateur de contourner lui-même un refus de permission. Accordez les
-  domaines un par un, et ne laissez pas `webfetch` en `allow` général.
+  récupérations une à une, et ne mettez pas `webfetch` en `allow` général.
 - **`websearch` : ce qu'il fait exactement.** OpenCode le réserve à ses propres
   fournisseurs hébergés, ou l'active via `OPENCODE_ENABLE_EXA` /
   `OPENCODE_ENABLE_PARALLEL`. Dans ce cas, selon sa documentation, « the tool

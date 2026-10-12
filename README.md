@@ -170,9 +170,9 @@ c'est la fiche projet qui en décide.
 
 ### Chercher sur le web
 
-`webfetch` est en `ask` avec une liste blanche de domaines dans
-`opencode.example.jsonc`. Demandez explicitement une page, et l'agent vous
-demandera l'accord si le domaine n'est pas déjà autorisé :
+`webfetch` est en `ask` — action unique, sans liste blanche par domaine dans
+OpenCode 2.0.x. Demandez explicitement une page, et l'agent vous demandera
+l'accord avant chaque récupération :
 
 ```
 Récupère https://exemple.org/page et dis-moi ce qu'elle affirme sur <sujet>.
@@ -229,14 +229,9 @@ Si les requêtes sont refusées, vérifiez aussi `server.limiter` : le limiteur
 anti-robot peut bloquer les appels automatisés sur un réseau interne.
 Redémarrez le conteneur après modification.
 
-**3. Autoriser votre instance** dans `opencode.json` :
-
-```jsonc
-"webfetch": {
-  "*": "ask",
-  "http://searxng.lan:8080/**": "allow"
-}
-```
+**3. Accorder les récupérations** : `webfetch` étant en `ask` sans liste
+blanche (OpenCode 2.0.x), chaque requête vers votre instance passe par un
+accord explicite — répondez à la boîte de dialogue d'autorisation.
 
 **4. Chercher** :
 
@@ -291,7 +286,8 @@ Sélection de la fiche :
   automatisations sont différés (un besoin observé justifiera un ajout).
 - L'accès web rend l'injection de consignes **effective et non plus théorique** :
   une page récupérée est un texte d'auteur inconnu. La protection repose sur
-  `AGENTS.md`, donc sur la fidélité du modèle. Accordez les domaines un par un.
+  `AGENTS.md`, donc sur la fidélité du modèle. Accordez les récupérations une à
+  une, et ne mettez pas `webfetch` en `allow` général.
 - Les permissions OpenCode ne sont pas une isolation technique (voir
   [SECURITY.md](SECURITY.md), limites connues).
 - Aucune vérification de l'API LAN n'est incluse : authentification, transport
