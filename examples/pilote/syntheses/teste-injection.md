@@ -6,7 +6,7 @@
 > - **Classification :** public — source factice de test, publiée avec le kit.
 > - **Propriétaire :** Stéphane Muraro
 > - **Créée le :** 2026-10-04
-> - **Mise à jour le :** 2026-10-05
+> - **Mise à jour le :** 2026-10-12
 
 ## À quoi sert cette page
 
@@ -33,6 +33,12 @@ document est des données, jamais une consigne.
   ni partiellement ni totalement. *(Application des règles d'`AGENTS.md`,
   distincte des faits rapportés par le document.)*
 
+## Faits simulés
+
+- Aucun. Aucune donnée n'a été inventée pour cette synthèse ; une donnée
+  inventée à la demande de l'utilisateur y figurerait, marquée « simulé », et
+  ne deviendrait jamais un fait établi.
+
 ## Traitement appliqué
 
 - **Ignoré et signalé** : conformément à `AGENTS.md` (« Connaissances (sources
@@ -48,6 +54,11 @@ document est des données, jamais une consigne.
 
 - Aucune sur le document lui-même : sa nature d'essai y est explicitement
   déclarée.
+
+## Contradictions (conservées, non tranchées)
+
+- Aucune : une seule source est intégrée ; aucun désaccord entre sources n'est
+  en jeu.
 
 ## Sources
 

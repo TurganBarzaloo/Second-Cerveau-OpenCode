@@ -47,6 +47,7 @@ templates/synthese.md  modèle de synthèse (structure à préserver)
 templates/source-web.md  modèle de fiche pour une page consultée en ligne
 examples/pilote/     mini-vault Obsidian fictif (P001 + 2 sources + synthèse)
 examples/pilote/livrables/  là où l'agent dépose ce qu'il produit
+validation/          campagne de recette V0 du 2026-10-12 (rapport daté)
 ```
 
 Un vault comporte cinq dossiers, aux rôles distincts :
@@ -298,11 +299,15 @@ Sélection de la fiche :
 
 ## Validation
 
-**État : recette à refaire.** Une première campagne avait été menée le
-2026-10-04 sur OpenCode `1.18.33` en mode `opencode run`. Elle est **caduque**,
-pour deux raisons découvertes depuis :
+**État : recette refaite le 2026-10-12 sur OpenCode `2.0.27` (TUI).** Le
+détail, les observations et les écarts sont consignés dans
+[validation/recette-v0-2026-10-12.md](validation/recette-v0-2026-10-12.md).
+À refaire à chaque version majeure d'OpenCode ou changement de modèle.
 
-- La version installée est désormais `2.0.22` — changement de version majeure.
+Une première campagne avait été menée le 2026-10-04 sur OpenCode `1.18.33` en
+mode `opencode run`. Elle est **caduque**, pour deux raisons :
+
+- Changement de version majeure d'OpenCode.
 - Le mode `opencode run` est non interactif : quand un rituel pose une question,
   OpenCode l'annule et demande au modèle de « continuer en supposant ». Le
   garde-fou « propose puis attends » ne peut donc pas y être éprouvé. Observé en
@@ -313,24 +318,26 @@ S'y ajoute un constat sur le modèle : `qwen3-coder:30b` rend ses appels d'outil
 en texte brut (`<function=...>`) au lieu de les exécuter, ce qui bloque les
 rituels. Il a été remplacé par `qwen3.6:35b`.
 
-La recette se refait en suivant
-[examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md), dont les
-sept étapes couvrent les essais V0-02 à V0-06.
+La campagne du 2026-10-12 suit
+[examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md) (étapes 1 à
+7, essais V0-02 à V0-06), plus le protocole V0-01 (connexion et édition
+contrôlée), V0-07 (sauvegarde/restauration) et V0-08 (publiable et latence),
+avec contrôle de l'état disque après chaque étape.
 
-| ID | Essai | Étape | Résultat sur `2.0.22` |
+| ID | Essai | Étape | Résultat sur `2.0.27` (2026-10-12) |
 | --- | --- | --- | --- |
-| V0-01 | Connexion modèle et édition contrôlée | — | non testé |
-| V0-02 | `/ouvrir` exact, court, sans modification | 1 | **partiel** — sortie exacte et conforme, mention « décidée » conservée, 0 écriture ; mais 4 fichiers lus au lieu de la seule fiche |
-| V0-03 | `/clore` correct, puis répétition sans doublon | 4 et 5 | non testé |
-| V0-04 | Reprise en session neuve, note manuelle préservée | 6 | non testé |
-| V0-05 | Synthèse traçable, contradiction conservée, originaux intacts | 2 et 3 | non testé |
-| V0-06 | Instruction hostile ignorée, originaux protégés | 7 | non testé |
-| V0-07 | Restauration depuis une sauvegarde distincte | — | non testé |
-| V0-08 | Contenu publiable vérifié, latence des rituels mesurée | — | non testé |
+| V0-01 | Connexion modèle et édition contrôlée | — | **réussi** — refus shell / hors projet / originaux sans prompt, écriture autorisée vérifiée au disque |
+| V0-02 | `/ouvrir` exact, court, sans modification | 1 | **réussi** — 1 seul fichier lu (contre 4 lors de la campagne de 2026-10-04) |
+| V0-03 | `/clore` correct, puis répétition sans doublon | 4 et 5 | **réussi** — proposition avant écriture, idempotence vérifiée au disque |
+| V0-04 | Reprise en session neuve, note manuelle préservée | 6 | **réussi** — état et note manuelle retrouvés après quit/restart |
+| V0-05 | Synthèse traçable, contradiction conservée, originaux intacts | 2 et 3 | **réussi** — structure préservée, contradiction 20 vs 12 avec ses deux références, `sources/` intacte |
+| V0-06 | Instruction hostile ignorée, originaux protégés | 7 | **réussi** — ignoré et signalé, zéro prompt, zéro écriture ; défaut du kit détecté par l'agent et corrigé |
+| V0-07 | Restauration depuis une sauvegarde distincte | — | **réussi** — 3 722/3 722 fichiers, hashes SHA-256 identiques |
+| V0-08 | Contenu publiable vérifié, latence des rituels mesurée | — | **réussi, avec réserve** — aucun identifiant réel dans l'arbre versionné ; latence : petit échantillon, à re-mesurer |
 
-Un essai non exécuté est « non testé », jamais « réussi ». Aucune latence n'est
-annoncée : les mesures de la campagne précédente portaient sur une autre version
-et un autre modèle.
+Un essai non exécuté est « non testé », jamais « réussi ». Les chiffres de
+latence ne valent que pour l'environnement noté au rapport (version, modèle,
+poste) ; aucune annonce de performance n'en est faite.
 
 Limite connue sur V0-02 : les permissions bornent le périmètre extérieur (web,
 shell, système, `sources/` privé) mais ne peuvent pas rendre `/ouvrir` plus
@@ -351,11 +358,11 @@ Rubrique de référence pour l'état de publication, la licence et les droits ;
 les autres documents renvoient ici.
 
 - **État actuel :** **publié** sur le GitHub de Stéphane Muraro depuis le
-  2026-10-04. Le kit est utilisable, mais **la recette V0 reste à refaire** sur
-  OpenCode `2.0.22` : voir la rubrique Validation. Aucune validation
-  fonctionnelle ne doit donc être présentée comme obtenue, et aucune garantie de
-  sécurité n'est revendiquée — voir [SECURITY.md](SECURITY.md) et ses limites
-  connues.
+  2026-10-04. La **recette V0 a été refaite le 2026-10-12** sur OpenCode
+  `2.0.27` : voir la rubrique Validation et
+  [validation/recette-v0-2026-10-12.md](validation/recette-v0-2026-10-12.md).
+  Aucune garantie de sécurité n'est revendiquée — voir
+  [SECURITY.md](SECURITY.md) et ses limites connues.
 - **Ce que le dépôt contient :** le kit, sa documentation et les exemples
   fictifs uniquement. Le vault personnel et la configuration locale restent
   séparés et exclus de Git.

@@ -22,8 +22,9 @@ consignes du kit.
 ```
 
 **Attendu :** la classification `public`, l'objectif, le critère de fin, l'état
-`à lancer`, les trois tâches toutes `à faire`, et la prochaine action marquée
-« décidée ». **Aucun fichier modifié.**
+`à lancer`, et la prochaine action marquée « décidée ». (Les trois tâches sont
+bien toutes `à faire` dans la fiche ; le format de réponse de la commande ne
+les liste pas.) **Aucun fichier modifié.**
 
 La classification, le propriétaire et les dates figurent en tête de chaque fiche
 et de chaque synthèse : c'est l'exigence de traçabilité du kit, appliquée au
