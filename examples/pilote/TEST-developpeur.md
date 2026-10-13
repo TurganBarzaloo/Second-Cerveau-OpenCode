@@ -23,7 +23,10 @@ du kit.
 **Prérequis :** aucun — ce test ne suppose pas que COMMENCER-ICI a été fait.
 Si vous avez déjà utilisé le pilote et voulez repartir de l'état initial,
 exécutez **hors agent**, depuis un shell à la racine du dépôt :
-`git restore examples/pilote/`.
+`git restore examples/pilote/`, puis `git clean -n examples/pilote/`
+(vérifiez la liste) et `git clean -f examples/pilote/` — les fichiers produits
+par les tests (fiche P002, jeu dans `livrables/`) ne sont pas suivis par Git,
+`git restore` seul ne les efface pas.
 
 ---
 
@@ -200,7 +203,10 @@ Vault privé » du [README](../../README.md) — et un `git init` local y rend
 chaque écriture de l'agent réversible.
 
 Pour remettre le pilote à son état initial après ce test, exécutez **hors
-agent** : `git restore examples/pilote/`.
+agent** : `git restore examples/pilote/`, puis `git clean -n examples/pilote/`
+(vérifiez la liste : la fiche P002 et le jeu de `livrables/`) et
+`git clean -f examples/pilote/` — ces fichiers ne sont pas suivis par Git,
+`git restore` seul ne les efface pas.
 
 ## Si une étape ne donne pas le résultat attendu
 
