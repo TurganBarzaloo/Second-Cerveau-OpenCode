@@ -369,9 +369,10 @@ Rubrique de référence pour l'état de publication, la licence et les droits ;
 les autres documents renvoient ici.
 
 - **État actuel :** **publié** sur le GitHub de Stéphane Muraro depuis le
-  2026-10-04. La **recette V0 a été refaite le 2026-10-12** sur OpenCode
-  `2.0.27`, et l'**essai V0-09** (deuxième test utilisateur : test développeur)
-  **a été exécuté le 2026-10-13** : voir la rubrique Validation,
+  2026-10-04, et le second cerveau est **en production depuis le 2026-10-13** :
+  la campagne de recette V0 est complète (V0-01 à V0-08 refaits le 2026-10-12
+  sur OpenCode `2.0.27`, et V0-09, l'essai du deuxième test utilisateur,
+  exécuté le 2026-10-13) — voir la rubrique Validation,
   [validation/recette-v0-2026-10-12.md](validation/recette-v0-2026-10-12.md) et
   [validation/v0-09-test-developpeur-2026-10-13.md](validation/v0-09-test-developpeur-2026-10-13.md).
   Aucune garantie de sécurité n'est revendiquée — voir
