@@ -15,6 +15,9 @@ Un livrable n'est ni une source ni une synthèse :
 La fiche projet reste l'autorité sur l'état d'avancement : un fichier présent ici
 ne signifie pas qu'une tâche est faite. C'est la fiche qui le dit.
 
-Dans ce pilote fictif, le livrable attendu est la fiche d'accueil de l'atelier
-(tâche `P001-T03`). Elle n'est pas fournie : c'est vous qui la produirez en
-suivant [COMMENCER-ICI.md](../COMMENCER-ICI.md).
+Dans ce pilote fictif, deux livrables attendus, tous deux non fournis :
+
+- la **fiche d'accueil de l'atelier** (tâche `P001-T03`), produite en suivant
+  [COMMENCER-ICI.md](../COMMENCER-ICI.md) ;
+- le **jeu snake en un seul fichier HTML** (tâche `P002-T01`), produit en
+  suivant [TEST-developpeur.md](../TEST-developpeur.md).

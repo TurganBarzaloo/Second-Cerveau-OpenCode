@@ -7,6 +7,11 @@ résultat exact que vous devez observer**. Si vous observez autre chose, c'est u
 
 Lancez `opencode` à la racine du dépôt, pas dans ce dossier.
 
+Vous préférez tester le kit sur une tâche de **développement** plutôt que sur
+l'atelier mémoire ? Il existe un parcours parallèle et indépendant :
+[TEST-developpeur.md](TEST-developpeur.md) — un petit jeu à faire développer
+à l'agent et à accepter au navigateur.
+
 Le scénario : un atelier fictif le 14 octobre 2026, **18 participants attendus**.
 Deux sources décrivent la salle A et ne sont pas d'accord sur le nombre de chaises.
 

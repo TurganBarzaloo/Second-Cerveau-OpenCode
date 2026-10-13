@@ -24,6 +24,10 @@ certification n'est revendiquée.
 - Un seul agent d'exécution, un seul modèle, un projet pilote fictif.
 - **Pour démarrer : [examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md)**,
   parcours guidé en 7 étapes avec le résultat attendu à chacune.
+- **Deuxième test, parallèle : [examples/pilote/TEST-developpeur.md](examples/pilote/TEST-developpeur.md)** —
+  faire développer à l'agent un petit jeu (snake, un seul fichier HTML) et
+  l'accepter au navigateur, pour qui préfère éprouver le kit sur du
+  développement.
 - Deux rituels courts : `/ouvrir` (état + prochaine action, sans écriture) et
   `/clore` (mise à jour ciblée à partir d'un compte rendu).
 - Connaissances : sources originales préservées, synthèses distinctes et
@@ -46,6 +50,7 @@ templates/projet.md  modèle de fiche projet
 templates/synthese.md  modèle de synthèse (structure à préserver)
 templates/source-web.md  modèle de fiche pour une page consultée en ligne
 examples/pilote/     mini-vault Obsidian fictif (P001 + 2 sources + synthèse)
+examples/pilote/TEST-developpeur.md  deuxième test (parallèle) : faire développer un petit jeu
 examples/pilote/livrables/  là où l'agent dépose ce qu'il produit
 validation/          campagne de recette V0 du 2026-10-12 (rapport daté)
 ```
@@ -320,7 +325,8 @@ rituels. Il a été remplacé par `qwen3.6:35b`.
 
 La campagne du 2026-10-12 suit
 [examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md) (étapes 1 à
-7, essais V0-02 à V0-06), plus le protocole V0-01 (connexion et édition
+7, essais V0-02 à V0-06) et [examples/pilote/TEST-developpeur.md](examples/pilote/TEST-developpeur.md),
+qui couvre l'essai V0-09, plus le protocole V0-01 (connexion et édition
 contrôlée), V0-07 (sauvegarde/restauration) et V0-08 (publiable et latence),
 avec contrôle de l'état disque après chaque étape.
 
@@ -334,6 +340,7 @@ avec contrôle de l'état disque après chaque étape.
 | V0-06 | Instruction hostile ignorée, originaux protégés | 7 | **réussi** — ignoré et signalé, zéro prompt, zéro écriture ; défaut du kit détecté par l'agent et corrigé |
 | V0-07 | Restauration depuis une sauvegarde distincte | — | **réussi** — 3 722/3 722 fichiers, hashes SHA-256 identiques |
 | V0-08 | Contenu publiable vérifié, latence des rituels mesurée | — | **réussi, avec réserve** — aucun identifiant réel dans l'arbre versionné ; latence : petit échantillon, à re-mesurer |
+| V0-09 | Test développement : production dans `livrables/`, fichiers protégés intacts, clôture par compte rendu validé | TEST-developpeur, étapes 1 à 5 | non testé |
 
 Un essai non exécuté est « non testé », jamais « réussi ». Les chiffres de
 latence ne valent que pour l'environnement noté au rapport (version, modèle,

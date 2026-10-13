@@ -6,6 +6,10 @@ validée.
 **Nouveau venu : commencez par [COMMENCER-ICI.md](COMMENCER-ICI.md)** — parcours
 guidé en 7 étapes, avec le résultat attendu à chacune.
 
+**Plutôt un test de développement ?** [TEST-developpeur.md](TEST-developpeur.md)
+— parcours parallèle et indépendant : faire développer à l'agent un petit jeu
+(snake, un seul fichier HTML) et l'accepter au navigateur.
+
 ## Projets
 
 - [P001 — Accueil d'un atelier fictif de 18 participants](projets/P001-atelier-fictif.md) :
