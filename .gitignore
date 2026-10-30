@@ -69,3 +69,4 @@ venv/
 .opencode/skills/maj-wikiappli/
 .opencode/skills/synthese-wikiappli/
 /templates/wikiappli-modele.wiki
+/.opencode/skills/*wikiappli*/
