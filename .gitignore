@@ -2,7 +2,11 @@
 
 # Fichiers de configuration sensibles
 opencode.json
+opencode.jsonc
 registre-risques.md
+
+# État local de la publication NAS (manifest, propre à chaque poste)
+.publication/
 
 # Documents de travail privés : cadrage, comptes rendus, sources de référence
 # non redistribuables (dont llm-wiki.md, sans licence de redistribution
@@ -54,3 +58,14 @@ venv/
 
 # Fichiers temporaires spécifiques à l'agent
 .opencode/session-*.json
+# Documents internes de travail : exclus du kit public, conservés localement.
+/projets/P002-prise-en-main.md
+/projets/P003-publication-nas.md
+/livrables/prise-en-main-second-cerveau.md
+/livrables/commande-ouvrir-amelioree.md
+
+# Fichiers de travail interne (skills et gabarit) : exclus du kit public,
+# conservés localement.
+.opencode/skills/maj-wikiappli/
+.opencode/skills/synthese-wikiappli/
+/templates/wikiappli-modele.wiki

@@ -14,12 +14,12 @@ certification n'est revendiquée.
 - **Organisation :** Racines Systèmes — second-cerveau-opencode
 - **Référence :** PROJ-001
 - **Classification :** Public
-- **Version :** 1.0
-- **Date d'application :** 04/10/2026
+- **Version :** 1.1 (ajouts NAS en validation)
+- **Date de rédaction :** 29/10/2026
 - **Propriétaire :** Stéphane Muraro
 - **Approbateur :** Stéphane Muraro
 - **Prochaine révision :** 04/10/2027
-- **État :** approuvé
+- **État :** brouillon pour les ajouts NAS ; recettes historiques du socle conservées
 
 - Un seul agent d'exécution, un seul modèle, un projet pilote fictif.
 - **Pour démarrer : [examples/pilote/COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md)**,
@@ -28,8 +28,9 @@ certification n'est revendiquée.
   faire développer à l'agent un petit jeu (snake, un seul fichier HTML) et
   l'accepter au navigateur, pour qui préfère éprouver le kit sur du
   développement.
-- Deux rituels courts : `/ouvrir` (état + prochaine action, sans écriture) et
-  `/clore` (mise à jour ciblée à partir d'un compte rendu).
+- Trois rituels courts : `/ouvrir` (état + prochaine action, sans écriture),
+  `/clore` (mise à jour ciblée à partir d'un compte rendu) et `/publie`
+  (publication des éléments validés vers le wiki partagé du NAS).
 - Connaissances : sources originales préservées, synthèses distinctes et
   traçables, contradictions conservées.
 - Sécurité proportionnée inspirée d'ISO/IEC 27001, sans certification ni
@@ -42,17 +43,23 @@ certification n'est revendiquée.
 README.md            ce fichier
 AGENTS.md            règles communes chargées à chaque session
 SECURITY.md          périmètre, mesures, limites, incident
+PUBLICATION-NAS.md   publication du vault vers le NAS : règles, matrice, scripts
 CREDITS.md           influences et provenance
 LICENSE.md           licence adoptée : MIT
 opencode.example.jsonc  configuration générique (valeurs fictives)
-.opencode/commands/  /ouvrir et /clore
+.opencode/commands/  /ouvrir, /clore et /publie déjà livrées
+.opencode/skills/    neuf compétences réutilisables, chargées à la demande
+scripts/             scripts de publication NAS (publier.ps1, planifier-taches.ps1)
 templates/projet.md  modèle de fiche projet
 templates/synthese.md  modèle de synthèse (structure à préserver)
 templates/source-web.md  modèle de fiche pour une page consultée en ligne
+projets/             travail local ; fiches internes P002/P003 exclues de Git
+livrables/commandes/ copies de distribution des commandes /publie et /clore
 examples/pilote/     mini-vault Obsidian fictif (P001 + 2 sources + synthèse)
 examples/pilote/TEST-developpeur.md  deuxième test (parallèle) : faire développer un petit jeu
 examples/pilote/livrables/  là où l'agent dépose ce qu'il produit
-validation/          rapports de recette V0 datés (2026-10-12, 2026-10-13)
+validation/          rapports de recette V0 et recette NAS locale distincte
+tests/               recette NAS reproductible sur dossiers temporaires
 ```
 
 Un vault comporte cinq dossiers, aux rôles distincts :
@@ -121,6 +128,31 @@ Sous Git Bash, `opencode run "/ouvrir …"` échoue de surcroît : le shell conv
 le `/` initial en chemin Windows. Préfixez par `MSYS2_ARG_CONV_EXCL='*'` si vous
 y tenez. Sans effet dans le TUI.
 
+## Skills du kit
+
+Les neuf skills sont dans `.opencode/skills/`. Ils apportent des méthodes aux
+demandes ordinaires ; `/ouvrir`, `/clore` et `/publie` restent des commandes
+distinctes. Les skills ne donnent pas de permissions supplémentaires et ne
+contournent pas les protections d'`AGENTS.md` ni les permissions effectives.
+
+| Skill | Usage |
+| --- | --- |
+| `integrer-source` | Intégrer une source dans une synthèse traçable. |
+| `interroger-connaissances` | Répondre à partir du corpus avec des références. |
+| `revue-projet` | Examiner une fiche projet sans la modifier. |
+| `controle-coherence` | Repérer les liens, classifications et états incohérents. |
+| `compte-rendu` | Structurer des notes en faits, décisions et actions. |
+| `produire-livrable` | Produire un fichier à partir de sources identifiées. |
+| `revue-publication` | Vérifier un périmètre de publication Git ou NAS. |
+| `revue-code` | Examiner un changement de code et ses risques. |
+| `sauvegarde-restauration` | Préparer et vérifier une sauvegarde ou restauration de contrôle. |
+
+OpenCode découvre ces instructions dans le projet et peut les charger à la
+demande, selon ses permissions. Leur présence ne garantit ni leur activation
+ni leur bon fonctionnement avec chaque modèle ou configuration. Ces neuf
+skills sont nouveaux : les recettes historiques du socle ne les couvrent pas.
+Leur découverte et leurs scénarios restent à éprouver dans le TUI du kit.
+
 ## Utilisation
 
 ### Rituel d'ouverture (lecture seule)
@@ -158,6 +190,41 @@ même fiche. Répéter le même compte rendu ne crée aucun doublon.
 Exemple complet et résultat attendu : étapes 4 et 5 de
 [COMMENCER-ICI.md](examples/pilote/COMMENCER-ICI.md).
 
+### Publication vers le NAS partagé (`/publie`)
+
+Le vault reste la seule mémoire : les éléments validés partent **en copie,
+dans un seul sens**, vers le wiki partagé de l'équipe sur le NAS.
+
+- **Ce qui part :** les fiches projet à l'état `terminé` et les synthèses ou
+  livrables qui les référencent ; un fichier désigné explicitement part aussi
+  (l'état du projet est ignoré, jamais la classification).
+- **Qui le voit :** chaque rôle — développeurs, hiérarchie, SSI, support — a
+  son dossier sur le NAS, avec la visibilité qui lui est due. La matrice et
+  toutes les règles sont dans
+  [PUBLICATION-NAS.md](PUBLICATION-NAS.md), document de référence.
+- **Ce qui ne part jamais :** un fichier `confidentiel` ou sans
+  classification, et les sources originales.
+- **Quand :** à la clôture d'un projet (`/clore` le propose, il ne l'impose
+  pas), à la demande (`/publie`, après prévisualisation validée), et aux
+  heures planifiées (13h et 17h, tâches installées par
+  `scripts/planifier-taches.ps1`).
+
+Le script n'efface rien sur le NAS : une version remplacée est archivée dans
+`_historique/`. Le profil d'exemple refuse le shell sauf l'appel canonique du
+publisher, soumis à confirmation (`ask`). Examinez ses arguments et choisissez
+un accord ponctuel ; n'utilisez ni `--auto` ni « always ». L'installation des
+tâches planifiées se fait manuellement, hors agent. Une tâche installée tourne
+ensuite sans confirmation interactive : son installation autorise ce traitement.
+
+Les commandes sont déjà livrées dans `.opencode/commands/`. Les copies de
+`livrables/commandes/` sont identiques et servent à la distribution ; aucun
+remplacement n'est nécessaire dans le kit. Pour un ancien vault privé, leur
+installation doit être faite explicitement par son propriétaire.
+
+**État NAS :** recette locale distincte du socle, pas de validation sur NAS réel.
+La procédure reproductible et ses limites sont dans
+[validation/recette-nas-2026-10-29.md](validation/recette-nas-2026-10-29.md).
+
 ### Connaissances (demandes ordinaires)
 
 - Ingestion : « Intègre `examples/pilote/sources/materiel.md` dans la synthèse
@@ -184,8 +251,9 @@ l'accord avant chaque récupération :
 Récupère https://exemple.org/page et dis-moi ce qu'elle affirme sur <sujet>.
 ```
 
-C'est OpenCode qui télécharge la page depuis votre poste : son contenu ne quitte
-pas votre réseau, seule l'URL visée est connue du site visité.
+OpenCode contacte le site depuis votre poste. La page rejoint ensuite le contexte
+envoyé au fournisseur de modèle configuré ; sa localisation détermine les flux.
+Le site peut également journaliser l'URL, l'adresse IP et les métadonnées HTTP.
 
 **Avant de vous demander l'autorisation, l'agent doit vous annoncer** l'URL
 exacte, ce qu'il en attend, le risque d'injection de consignes, et le fait qu'une
@@ -200,14 +268,14 @@ original distant ne se conserve pas : cette fiche en est la seule trace datée.
 `websearch` est en `ask` mais **ne fonctionne pas tel quel avec un modèle local** :
 OpenCode le réserve à ses fournisseurs hébergés, ou aux variables
 `OPENCODE_ENABLE_EXA` / `OPENCODE_ENABLE_PARALLEL`. Il passe alors par un service
-tiers hébergé, sans authentification. Avant de l'activer, lisez les quatre faits
-listés dans [SECURITY.md](SECURITY.md) — en particulier celui-ci : **la requête
+tiers selon le backend activé. Avant de l'activer, lisez les limites
+« Flux externes à qualifier » de [SECURITY.md](SECURITY.md) : **la requête
 n'est pas rédigée par vous mais par le modèle**, à partir de votre fiche projet et
 de vos synthèses.
 
 ### Recherche souveraine : SearXNG sur votre réseau
 
-Pour garder la capacité de recherche sans flux vers un tiers, hébergez
+Pour maîtriser le point de sortie des recherches, hébergez
 [SearXNG](https://github.com/searxng/searxng) sur votre réseau et interrogez-le
 avec `webfetch`. Le point de sortie devient **votre** serveur, et vous voyez la
 requête puisque c'est vous qui construisez l'URL.
@@ -261,21 +329,27 @@ Le vault réel reste séparé de ce dépôt. Parcours pour l'utiliser avec le ki
 
 1. Créer un dossier de travail `vault-prive/` hors de ce dépôt.
 2. Y copier le socle du kit : `AGENTS.md` (règles), `.opencode/commands/`
-   (`ouvrir.md`, `clore.md`) et la configuration locale `opencode.json`
-   (protections du projet + modèle ; celle créée à l'étape 3 de l'installation,
-   ou recréée depuis `opencode.example.jsonc` si elle est indisponible).
+   (`ouvrir.md`, `clore.md`, `publie.md`), `.opencode/skills/` (compétences),
+   `scripts/` (publication NAS) et la
+   configuration locale `opencode.json` (protections du projet + modèle ;
+   celle créée à l'étape 3 de l'installation, ou recréée depuis
+   `opencode.example.jsonc` si elle est indisponible).
 3. Créer les dossiers de travail : `projets/`, `sources/`, `syntheses/` et
    `livrables/`. Sans `livrables/`, l'agent n'a nulle part où déposer ce qu'il
    produit.
 4. Créer le projet : copier `templates/projet.md` dans `vault-prive/projets/`,
-   renommer PXXX avec le prochain identifiant libre. Copier aussi
-   `templates/synthese.md` et `templates/source-web.md`.
+   renommer PXXX avec le prochain identifiant libre. Copier aussi les modèles
+   `templates/synthese.md` et `templates/source-web.md` dans le dossier
+   `templates/` du vault.
 5. Lancer `opencode` à la racine de `vault-prive/` : les commandes, les règles
    et les permissions du kit s'appliquent alors au vault.
 6. **Y faire un `git init`.** Le vault n'a pas de dépôt distant et ne doit jamais
    en recevoir, mais un dépôt local rend chaque écriture de l'agent réversible :
    une synthèse écrasée se retrouve par `git restore`. Un crochet `pre-push` qui
    refuse tout envoi est une précaution utile.
+7. **(Optionnel) Activer la publication NAS** : adapter le partage dans
+   `scripts/publier.ps1` (variable `$NASDefaut`), puis installer les tâches
+   de 13h et 17h — voir [PUBLICATION-NAS.md](PUBLICATION-NAS.md).
 
 Sélection de la fiche :
 
@@ -287,9 +361,11 @@ Sélection de la fiche :
 
 ## Limites
 
-- Pilote : un seul projet, un seul modèle, deux rituels. Le multi-projets
+- Pilote : un seul projet, un seul modèle, trois rituels. Le multi-projets
   automatisé, les agents spécialisés, le MCP, les connecteurs et les
   automatisations sont différés (un besoin observé justifiera un ajout).
+  La publication NAS est la première sortie de données du kit, volontairement
+  unidirectionnelle et contrôlée : voir [PUBLICATION-NAS.md](PUBLICATION-NAS.md).
 - L'accès web rend l'injection de consignes **effective et non plus théorique** :
   une page récupérée est un texte d'auteur inconnu. La protection repose sur
   `AGENTS.md`, donc sur la fidélité du modèle. Accordez les récupérations une à
@@ -363,20 +439,19 @@ La sobriété interne reste donc une consigne, pas une contrainte technique.
 - Sauvegarde automatisée datée et rotation.
 - Multi-projets : une fiche par projet réelle dans le vault privé.
 
-## Publication (parcours en cours)
+## Publication : socle historique et ajouts NAS
 
 Rubrique de référence pour l'état de publication, la licence et les droits ;
 les autres documents renvoient ici.
 
-- **État actuel :** **publié** sur le GitHub de Stéphane Muraro depuis le
-  2026-10-04, et le second cerveau est **en production depuis le 2026-10-13** :
-  la campagne de recette V0 est complète (V0-01 à V0-08 refaits le 2026-10-12
-  sur OpenCode `2.0.27`, et V0-09, l'essai du deuxième test utilisateur,
-  exécuté le 2026-10-13) — voir la rubrique Validation,
-  [validation/recette-v0-2026-10-12.md](validation/recette-v0-2026-10-12.md) et
-  [validation/v0-09-test-developpeur-2026-10-13.md](validation/v0-09-test-developpeur-2026-10-13.md).
-  Aucune garantie de sécurité n'est revendiquée — voir
-  [SECURITY.md](SECURITY.md) et ses limites connues.
+- **Socle historique :** le journal du projet annonce une publication le
+  2026-10-04 et une mise en production le 2026-10-13. Les recettes V0 datées
+  des 12 et 13 octobre sont conservées sans modification.
+- **Version locale actuelle :** les ajouts NAS et les nouvelles permissions
+  sont distincts de ce socle. Leur recette sur dossiers temporaires est décrite
+  dans [validation/recette-nas-2026-10-29.md](validation/recette-nas-2026-10-29.md).
+  Ni cette recette ni les tests V0 ne constituent une approbation sur NAS réel
+  ou une validation de la nouvelle configuration dans OpenCode.
 - **Ce que le dépôt contient :** le kit, sa documentation et les exemples
   fictifs uniquement. Le vault personnel et la configuration locale restent
   séparés et exclus de Git.
@@ -385,10 +460,7 @@ les autres documents renvoient ici.
   date ne sont plus valides.
 - **Licence :** MIT, **adoptée** (décision du 2026-10-04). Texte complet dans
   [`LICENSE.md`](LICENSE.md).
-- **Mentions de copyright :** « Copyright (c) 2026
-  Stéphane Muraro » et « Copyright (c) 2026 Racines Systèmes ».
-  Aucune copropriété, aucun partage égal ni cession de droits préexistants n'est
-  présumée.
+- **Mention de copyright :** « Copyright (c) 2026 Stéphane Muraro ».
 - **Objectif final :** second cerveau IA open source publié, compatible
   OpenCode et LLM LAN/local, léger, évolutif, inspiré d'ISO 27001 sans
   certification.

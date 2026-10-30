@@ -56,3 +56,15 @@ N'ingère aucune source, ne réindexe rien, aucune sauvegarde ni revue globale.
 
 Tâches modifiées et leur nouvel état · décisions · blocages · propositions en
 attente · point de reprise. Rien n'a changé : dis-le, n'écris dans aucun fichier.
+
+## 5. Publication, seulement si elle est due
+
+Si la fiche est à l'état `terminé` après les écritures : prévisualiser
+`/publie` en shell (`powershell -NoProfile -ExecutionPolicy Bypass -File
+scripts/publier.ps1 -DryRun -Projets PXXX`). Si au moins un fichier est à
+publier ou à mettre à jour, proposer la publication et dérouler `/publie`
+jusqu'à ma validation : la publication reste une décision utilisateur, jamais
+un aboutissement automatique de la clôture. Un refus, une erreur ou un NAS
+inaccessible doit être signalé ; ne jamais le présenter comme « déjà à jour ».
+Si les copies distantes ont été vérifiées et sont identiques, le dire en une
+ligne, sans rien écrire. Si rien n'est éligible, dire « rien à publier ».

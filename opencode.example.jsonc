@@ -41,7 +41,7 @@
   // faire fonctionner les rituels.
   "model": "ia-lan/<identifiant-modele>",
 
-  // Aucun partage automatique des conversations, aucun cloud.
+  // Aucun partage automatique ; les appels au fournisseur et au Web subsistent.
   "share": "disabled",
 
   // ------------------------------------------------------------------
@@ -50,8 +50,8 @@
   // ------------------------------------------------------------------
   "permission": {
     // ACCÈS WEB — `webfetch` récupère une page que vous désignez. C'est OpenCode
-    // qui la télécharge depuis votre poste : le contenu ne quitte pas votre
-    // réseau, seule l'URL visée est connue du site visité.
+    // qui contacte le site depuis votre poste. La page rejoint le contexte
+    // transmis au fournisseur de modèle configuré ; ce n'est pas sans flux.
     // Ce champ n'accepte qu'une action plate ("allow", "ask" ou "deny") dans
     // OpenCode 2.0.x : pas de liste blanche par domaine. En "ask", chaque
     // récupération demande votre accord.
@@ -63,18 +63,22 @@
     // OPENCODE_ENABLE_EXA / OPENCODE_ENABLE_PARALLEL. Il passe alors par un
     // service tiers hébergé, sans authentification.
     // Point souvent ignoré : la requête est rédigée par le MODÈLE depuis son
-    // contexte (fiche projet, synthèses), pas par vous. Lisez SECURITY.md,
-    // rubrique « websearch : ce qu'il fait exactement », avant d'activer.
+    // contexte (fiche projet, synthèses), pas par vous. Lisez les limites
+    // « Flux externes à qualifier » dans SECURITY.md avant d'activer.
     // Alternative réellement souveraine : SearXNG sur votre réseau interrogé
     // par webfetch — voir « Recherche souveraine » dans le README.
     "websearch": "ask",
     // Un seul agent d'exécution : pas de sous-agents.
     "task": "deny",
-    // Pas de shell : inutile au travail Markdown, et voie de contournement de
-    // la protection des originaux. Les commandes git s'exécutent hors agent.
-    // (À réévaluer, avec confirmation, si un besoin concret apparaît :
-    // "bash": { "*": "ask" }.)
-    "bash": "deny",
+    // Shell refusé sauf l'appel canonique du publisher, sur confirmation.
+    // Syntaxe : https://opencode.ai/docs/permissions/ (consultée le 2026-10-29).
+    // Ne pas utiliser --auto ni approuver « always ». Vérifier les arguments.
+    // Installation des tâches et commandes Git : terminal manuel, hors agent.
+    "bash": {
+      "*": "deny",
+      "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/publier.ps1": "ask",
+      "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/publier.ps1 *": "ask"
+    },
 
     // LECTURE — sobriété imposée techniquement, et non par simple consigne :
     // les rituels ne doivent lire que la fiche concernée et le corpus utile.
@@ -128,6 +132,7 @@
       "examples/pilote/sources/**": "deny",
       "templates/**": "deny",
       ".opencode/**": "deny",
+      "scripts/**": "deny",
       "AGENTS.md": "deny",
       "opencode.json": "deny",
       "opencode.jsonc": "deny",

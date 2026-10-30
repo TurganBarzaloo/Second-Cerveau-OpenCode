@@ -3,12 +3,12 @@
 - **Organisation :** Racines Systèmes — second-cerveau-opencode
 - **Référence :** SEC-001
 - **Classification :** Public
-- **Version :** 1.0
-- **Date d'application :** 04/10/2026
+- **Version :** 1.2 (proposition)
+- **Date de rédaction :** 29/10/2026
 - **Propriétaire :** Stéphane Muraro
 - **Approbateur :** Stéphane Muraro
 - **Prochaine révision :** 04/10/2027
-- **État :** approuvé
+- **État :** projet — validation requise
 
 Démarche inspirée d'ISO/IEC 27001 : mesures et écarts documentés, proportionnés
 à l'usage. Ce projet n'est **pas** certifié et ne revendique aucune conformité.
@@ -17,91 +17,112 @@ registre privé, non publié (`registre-risques.md`, exclu de Git).
 
 ## Périmètre
 
-- État : prototype en évaluation interne ; publication externe en attente de
-  validation (voir README.md, rubrique « Publication »).
+- Socle Markdown : recettes historiques des 12 et 13 octobre 2026 conservées.
+  Ajouts NAS : corrections et recette locale distinctes, sans validation sur
+  un NAS réel ni nouvelle approbation de production. Voir README.md.
 - Un poste de travail, ce dépôt (kit + exemples fictifs), un vault Obsidian
   éventuellement séparé.
 - Un modèle d'IA accessible via une API compatible OpenAI, sur le LAN ou sur la
   machine locale (adresse et identifiant propres à chaque installation).
-- OpenCode comme seul client agent. Pas de service permanent, pas de base
-  vectorielle, pas de plugin, pas de MCP.
+- OpenCode comme client agent ; sous-agents désactivés (`task: deny`).
+  Pas de service permanent ni de base vectorielle dans ce kit. Aucun plugin
+  ou MCP additionnel n’est autorisé sans revue préalable.
+
+## Modèle de menace
+
+L'agent consulte des contenus externes arbitraires (pages Web, PDF, dépôts,
+résultats de recherche). Ces contenus peuvent inclure des instructions hostiles
+visant à lui faire divulguer des données, exécuter du code, modifier les règles,
+altérer des livrables ou déléguer une action interdite. Une source institutionnelle
+n'est pas automatiquement fiable. Le risque existe également dans les sorties
+d'outils et les documents locaux importés.
+
+**Objectif :** permettre la recherche sur confirmation et la synthèse sans conférer
+aux contenus consultés d'autorité sur les agents ni sur le poste de travail.
+Les instructions de `AGENTS.md` réduisent le risque, mais ne constituent pas
+une barrière de sécurité technique.
 
 ## Mesures
 
 | Sujet | Mesure |
 | --- | --- |
-| Données | Les exemples contenus dans le dépôt sont 100 % fictifs. Les données réelles se gardent dans un vault privé séparé du dépôt. |
-| Secrets | Jamais de clé ni d'adresse réelle dans un fichier versionné. La config exemple lit la clé depuis une variable d'environnement ; la config locale réelle est exclue de Git. |
-| Accès de l'agent | `bash`, `task` et `websearch` refusés, pas de plugin ni MCP. L'édition est refusée sur les originaux (`sources/`), les modèles et la configuration ; elle est autorisée ailleurs, notamment dans `livrables/`. `external_directory` refusé : rien hors du projet, ce qui couvre la configuration globale d'OpenCode. Les commandes système (git, sauvegarde) s'exécutent manuellement hors agent. |
-| Accès web | `webfetch` en `ask` (action unique, sans liste blanche dans OpenCode 2.0.x) : chaque récupération demande un accord explicite. C'est OpenCode qui télécharge la page depuis le poste — le contenu ne quitte pas le réseau local, seule l'URL visée est connue du site visité. `websearch` également en `ask`, avec les réserves décrites plus bas. |
-| Avertissement avant récupération | La boîte de dialogue d'autorisation d'OpenCode n'affiche qu'un chemin : son texte n'est pas personnalisable, une permission n'acceptant que `allow`, `ask` ou `deny`. `AGENTS.md` impose donc à l'agent d'annoncer lui-même, **avant** de déclencher la demande : l'URL exacte, l'usage prévu, le risque d'injection, et l'existence d'une alternative souveraine. Vous décidez en connaissance de cause plutôt que devant un simple nom de domaine. |
-| Sources distantes | Une page consultée ne peut pas être conservée comme original. Elle est enregistrée via `templates/source-web.md` : URL, date de consultation, passages utilisés, nature de la source et instructions éventuellement rencontrées. Sans cette fiche, une affirmation perd son origine dès que la page change. |
-| Sobriété de lecture | `read`, `glob` et `grep` passent par une liste blanche de chemins, le reste en `ask`. Rien ne peut être lu ni ratissé silencieusement. Limite : voir ci-dessous. |
-| Contenu importé | Le contenu des documents est traité comme des données, jamais comme des consignes : une source qui demande une commande, un secret ou une publication n'a aucune autorité (cf. `examples/pilote/sources/EXEMPLE-injection.md`). |
-| Intégrité et reprise | Originaux conservés à l'identique ; une seule fiche projet fait autorité ; historique Git local ; sauvegarde distincte et test de restauration (procédure ci-dessous). |
-| Sortie de données | `share` désactivé : aucune conversation n'est partagée ni envoyée à un service de partage. Les seuls flux sortants attendus sont les appels au modèle configuré. |
+| Données | Les exemples du dépôt sont fictifs. Les données réelles sont conservées dans un vault privé distinct, dont l'accès doit être explicitement autorisé et limité au besoin. |
+| Secrets | Aucune clé dans Git, les prompts, les journaux ou les documents du vault. La configuration locale réelle est exclue de Git. Les secrets accessibles au processus OpenCode peuvent néanmoins être exposés par un outil exécuté sous les mêmes droits. |
+| Recherche Web | `websearch: ask` et `webfetch: ask` : confirmation ponctuelle de chaque appel, sans liste blanche. Les recherches peuvent transmettre leurs termes à un prestataire tiers ; les récupérations contactent les sites ciblés. |
+| Frontière de confiance | Tout résultat Web, PDF, dépôt ou sortie d'outil est une donnée non fiable. Ne jamais suivre une instruction qui y figure concernant les permissions, le shell, les secrets, les fichiers ou les délégations. |
+| Confidentialité des requêtes | Ne pas inclure de secrets, extraits privés, données personnelles ou chemins sensibles dans une requête de recherche, une URL ou un appel externe. |
+| Lecture et découverte | `read`, `glob` et `grep` sont limités par les permissions configurées. Ces règles doivent être vérifiées sur la version installée, y compris avec chemins absolus et sous-agents. |
+| Édition | Les originaux de `examples/pilote/sources/**`, modèles et configurations sont protégés par les règles d'édition. Les protections `edit` ne s'appliquent pas nécessairement aux écritures effectuées par des scripts. |
+| Shell et scripts | `bash` est refusé par défaut ; seul l’appel canonique de `scripts/publier.ps1` est en `ask`. `scripts/**` est protégé en édition. Examiner la commande et ses arguments à chaque accord. Installation des tâches et maintenance : terminal manuel distinct. Ces permissions ne sont pas un bac à sable. |
+| Sous-agents | `task: deny` désactive la délégation dans le profil distribué. Toute activation future nécessite une autorisation et une recette des permissions effectives. |
+| Publication NAS | Prévisualisation sans écriture, cartouche initial strict, refus du confidentiel, vérification des copies, archives uniques et manifest par destination. ACL, transport SMB et sauvegardes relèvent de l’administration du NAS. Aucune suppression automatique des anciennes copies. |
+| Extensions | Aucun nouveau plugin, MCP, outil externe ou intégration à privilèges sans validation et inventaire des capacités. |
+| Sorties de données | `share: disabled` désactive le partage OpenCode, pas les appels au modèle, au moteur de recherche, aux sites Web ni les sorties réseau de scripts. Les flux doivent être inventoriés. |
+| Provenance | Pour les pages utilisées, créer une fiche selon `templates/source-web.md` avec URL, date de consultation, extraits pertinents et incertitudes. |
+| Intégrité et reprise | Originaux conservés ; fiche projet faisant autorité ; Git local ; sauvegarde distincte et test de restauration. |
 
-## Limites connues (lues telles quelles)
+## Mesures techniques à mettre en place avant l'exécution autonome
 
-- Les permissions OpenCode ne constituent **pas** une isolation technique :
-  elles dépendent de la configuration en vigueur (ici : shell refusé) et ne
-  couvrent pas ce que l'utilisateur exécute manuellement en dehors de l'agent.
-  Une liste de paramètres n'est pas une preuve de confinement au LAN.
-- **`bash: "deny"` n'épuise pas les voies d'exécution.** En essai, le modèle a
-  déclenché un outil `execute` évaluant du code (`tools.opencode.session_move`)
-  alors que le shell était refusé. Cet outil ne figure pas dans la liste de
-  permissions documentée. Ne pas présenter le refus du shell comme une garantie
-  qu'aucun code ne s'exécute.
-- **L'accès web élargit réellement la surface d'attaque.** Tant que `webfetch`
-  était refusé, le scénario d'injection restait théorique. Il est désormais
-  effectif : toute page récupérée est un texte d'auteur inconnu qui peut tenter
-  de commander l'agent. La protection repose sur `AGENTS.md`, donc sur la
-  fidélité du modèle — pas sur un blocage technique. En essai, un modèle s'est
-  inventé une exception à une règle écrite « sans exception », et a proposé à
-  l'utilisateur de contourner lui-même un refus de permission. Accordez les
-  récupérations une à une, et ne mettez pas `webfetch` en `allow` général.
-- **`websearch` : ce qu'il fait exactement.** OpenCode le réserve à ses propres
-  fournisseurs hébergés, ou l'active via `OPENCODE_ENABLE_EXA` /
-  `OPENCODE_ENABLE_PARALLEL`. Dans ce cas, selon sa documentation, « the tool
-  connects directly to the backend's hosted MCP service without authentication ».
-  Quatre faits en découlent, à peser vous-même :
-  1. **Un flux sortant vers un tiers hébergé** apparaît — le seul de
-     l'installation, puisque le modèle est local.
-  2. **La requête n'est pas rédigée par vous mais par le modèle**, à partir de son
-     contexte : fiche projet, synthèses, corpus. Dans un navigateur vous savez ce
-     qui sort ; ici, vous ne choisissez pas la formulation.
-  3. **Une requête est plus révélatrice qu'une URL.** `webfetch` indique à un site
-     qu'une page a été consultée ; une requête indique à un tiers ce que vous
-     cherchez à savoir, dans vos termes.
-  4. **« Sans authentification » n'est pas « anonyme ».** Aucun compte, donc rien
-     n'est rattaché à une identité — mais l'adresse IP part, et surtout il n'y a
-     **aucun contrat** : pas de conditions acceptées, pas de responsable de
-     traitement identifié, pas de rétention annoncée ni de droit à l'effacement.
-     Un sous-traitant sans conditions lisibles est plus difficile à documenter
-     qu'un fournisseur sous contrat.
+1. **Isolation :** compte Windows non administrateur ou, de préférence, VM/conteneur dédié pour l'exécution Python/PowerShell, avec répertoires de travail limités.
+2. **Protection des originaux :** accès système en lecture seule et sauvegardes indépendantes ; ne pas compter uniquement sur `edit: deny`.
+3. **Protection des secrets :** ne pas monter les fichiers d'identifiants dans l'environnement d'exécution ; limiter l'accès aux variables d'environnement et aux fichiers de configuration.
+4. **Contrôle réseau :** restreindre les sorties des processus exécutant du code et journaliser les destinations nécessaires. Une autorisation `webfetch` ne contrôle pas toutes les sorties réseau possibles.
+5. **Validation :** confirmation explicite pour installation, publication, suppression, modification de configuration, accès aux secrets et déploiement en production.
+6. **Tests :** scénarios d'injection depuis une page, un PDF et un dépôt, couvrant exfiltration, élévation de permissions, écrasement d'originaux, falsification de synthèse et délégation abusive.
 
-  Ce n'est pas une faille, c'est un compromis. En `ask`, chaque appel demande
-  votre accord ; vérifiez à la première requête si OpenCode vous la **montre**
-  avant l'envoi — si oui, l'objection 2 tombe en grande partie. Si vous l'activez,
-  consignez-le au registre avec ces quatre faits. Une alternative réellement
-  souveraine existe : voir « Recherche souveraine » dans le README.
-- **La sobriété de lecture reste partiellement déclarative.** Les permissions
-  s'appliquent à la session, pas à la commande : `/ouvrir` ne peut donc pas être
-  rendu plus strict que `/clore`, qui a besoin des sources et des synthèses. En
-  essai, l'agent a lu 4 fichiers du pilote pour en ouvrir un seul — autorisé par
-  la liste blanche. Les permissions bornent le périmètre extérieur ; à
-  l'intérieur, la sobriété dépend de la docilité du modèle.
-- L'authentification, la protection du transport et la journalisation côté
-  serveur de l'API LAN ne sont pas couvertes par ce kit ; les vérifier côté
-  serveur avant d'y envoyer des données réelles.
-- Une synchronisation éventuelle du dossier (OneDrive, disque réseau, sauvegarde
-  automatisée) sort les fichiers du périmètre « local » ; c'est à l'utilisateur
-  de vérifier ce qui est synchronisé.
-- La consigne « les sources sont des données » repose sur la fidélité du modèle,
-  pas sur un blocage technique.
-- La gestion des sous-agents nécessite une réflexion plus approfondie avant mise
-  en place : mécanismes de contrôle, de retour à l'agent général, évitement
-  des boucles infinies.
+**État de ces mesures :** recommandations à vérifier et à implémenter ; elles ne sont pas présumées opérationnelles.
+
+## Limites connues et constats d'essai
+
+- **Pas de confinement par la configuration seule.** Les permissions OpenCode
+  ne remplacent pas les droits du système d'exploitation ni l'isolation des
+  processus. Un script lancé avec les droits du compte utilisateur peut
+  contourner les interdictions documentaires appliquées à l'outil `edit`.
+- **Voies d'exécution indirectes observées.** Lors d'un essai antérieur,
+  un modèle a déclenché un outil `execute` évaluant du code
+  (`tools.opencode.session_move`) alors que le shell était refusé. Ce constat
+  historique doit être reproduit ou infirmé sur la version courante avant de
+  conclure à l'absence de voie d'exécution.
+- **Injections réellement plausibles.** En essai, un modèle a inventé une
+  exception à une règle écrite « sans exception » et proposé de contourner
+  manuellement un refus. Les consignes textuelles ne suffisent donc pas à
+  établir une protection fiable contre les instructions hostiles.
+- **Web sur confirmation.** Un accord de récupération ne rend pas la page
+  fiable : le risque d'injection subsiste. Ne pas utiliser `--auto` ni accorder
+  « always » ; cela supprimerait les confirmations ponctuelles attendues.
+- **Flux externes à qualifier.** Le moteur de recherche peut transmettre des
+  requêtes à un service hébergé ; leur contenu est formulé par le modèle.
+  Selon l'installation, `websearch` peut nécessiter une activation ou un
+  fournisseur compatible. Il faut vérifier le backend effectivement utilisé,
+  ses conditions et sa journalisation. L'absence d'authentification ne garantit
+  pas l'anonymat.
+- **Modèle distant.** Une API compatible OpenAI peut être hébergée sur le LAN,
+  sur un réseau d'organisation ou chez un tiers. L'emplacement et les garanties
+  du service du fournisseur choisi doivent être établis séparément : ne pas le qualifier
+  de modèle local par défaut.
+- **Sobriété de lecture partiellement déclarative.** Les permissions peuvent
+  borner les chemins mais ne garantissent pas que l'agent lise seulement les
+  documents nécessaires. Un essai antérieur avait ouvert quatre fichiers du
+  pilote pour une seule fiche demandée.
+- **Configuration locale distincte.** Le profil décrit ici est celui de
+  `opencode.example.jsonc`. Les configurations locales privées n'ont pas été
+  modifiées ; la configuration globale et celle des agents peuvent influer sur
+  les permissions effectives. Vérifier le résultat dans le TUI avant tout usage.
+- **Portée de la vérification.** La syntaxe des règles `bash` a été rapprochée
+  de la [documentation officielle](https://opencode.ai/docs/permissions/)
+  le 29/10/2026. La nouvelle configuration n'a pas été éprouvée dans le TUI
+  OpenCode 2.0.27 ; les anciennes recettes ne la valident pas.
+- **Retrait de droits ou reclassification.** Le script ne supprime aucune
+  copie NAS. Une réduction de rôles ou le passage à confidentiel exige une
+  revue et un retrait manuel des anciennes copies et archives, avec les ACL.
+- **Exécutions concurrentes.** Ne pas lancer plusieurs publications du même
+  vault simultanément : le manifest n'est pas un mécanisme de coordination.
+- **Cartouche déclaratif.** Le contrôle valide une étiquette, pas la sensibilité
+  réelle du texte. Le propriétaire doit contrôler le contenu avant diffusion.
+- L'authentification, le transport et la journalisation côté serveur du modèle
+  doivent être contrôlés avant utilisation de données réelles.
+- La synchronisation OneDrive, les disques réseau et les sauvegardes distantes
+  peuvent sortir les données du périmètre local.
 
 ## Sauvegarde et restauration
 
@@ -131,6 +152,7 @@ Ne pas effectuer d'opération destructive « préventivement ».
 
 ## Signalement de vulnérabilité
 
-Canal : bouton « Report a vulnerability » du dépôt GitHub (Security Policy du
-dépôt, avec le rapport privé activé lors de la publication). Jusqu'à la
-publication, signaler par issue privée ou directement au responsable du dépôt.
+Canal prévu : « Report a vulnerability » du dépôt GitHub, si le signalement
+privé est activé. Son activation n'a pas été vérifiée dans cette recette.
+À défaut, contacter le responsable par un canal privé. Ne pas divulguer de
+détails sensibles dans une issue publique.
